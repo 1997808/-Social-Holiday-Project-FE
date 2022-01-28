@@ -1,57 +1,32 @@
 import React from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { Counter } from './app/counter/Counter';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+      {/* <Counter /> */}
+      <figure class="md:flex bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
+        <img class="w-24 h-24 md:w-48 md:h-auto md:rounded-none rounded-full mx-auto" src="/sarah-dayan.jpg" alt="" width="384" height="512" />
+        <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+          <blockquote>
+            <p class="text-lg font-medium">
+              “Tailwind CSS is the only framework that I've seen scale
+              on large teams. It’s easy to customize, adapts to any design,
+              and the build size is tiny.”
+            </p>
+          </blockquote>
+          <figcaption class="font-medium">
+            <div class="text-sky-500 dark:text-sky-400">
+              Sarah Dayan
+            </div>
+            <div class="text-slate-700 dark:text-slate-500">
+              Staff Engineer, Algolia
+            </div>
+          </figcaption>
+        </div>
+      </figure>
+    </div >
   );
 }
 
