@@ -31,9 +31,9 @@ function App() {
           </Route>
 
           <Route exact path="/" element={
-            <ProtectedRoute>
-              <ClientLayout />
-            </ProtectedRoute>
+            // <ProtectedRoute>
+            <ClientLayout />
+            // </ProtectedRoute>
           }>
             <Route index element={<Home />} />
             <Route path="search" element={<Search />} />
