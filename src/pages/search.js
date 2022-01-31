@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Home = () => {
+export const Search = () => {
   return (
     <div className="">
-      <p>home</p>
+      <p>Search</p>
     </div>
   );
 };

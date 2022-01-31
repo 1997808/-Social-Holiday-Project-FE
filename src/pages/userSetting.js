@@ -1,9 +1,9 @@
 import React from "react";
 
-export const Home = () => {
+export const UserSetting = () => {
   return (
     <div className="">
-      <p>home</p>
+      <p>UserSetting</p>
     </div>
   );
 };
