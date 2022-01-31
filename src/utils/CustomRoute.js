@@ -6,7 +6,7 @@ export const ProtectedRoute = ({ children }) => {
   const auth = useSelector((state) => state.auth);
   let location = useLocation();
 
-  if (!auth.admin) {
+  if (!auth.user) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 
@@ -17,8 +17,8 @@ export const AuthRoute = ({ children }) => {
   const auth = useSelector((state) => state.auth);
   let location = useLocation();
 
-  if (auth.admin) {
-    return <Navigate to="/admin" state={{ from: location }} />;
+  if (auth.user) {
+    return <Navigate to="/" state={{ from: location }} />;
   }
 
   return children;

@@ -5,26 +5,42 @@ import { ClientLayout } from "./pages/layout/client"
 
 import { Home } from "./pages/index"
 import { Page404 } from "./pages/404"
+import { FriendRequest } from "./pages/friendRequest"
+import { Login } from "./pages/login"
+import { Signup } from "./pages/signup"
+import { Message } from "./pages/message"
+import { Notification } from "./pages/notification"
+import { Profile } from "./pages/profile"
+import { Search } from "./pages/search"
+import { UserSetting } from "./pages/userSetting"
 
 function App() {
   return (
     <Router>
       <ScrollToTop>
         <Routes>
-          <Route exact path="/" element={<ClientLayout />}>
+          <Route exact path="/" element={
+            <AuthRoute>
+              <ClientLayout />
+            </AuthRoute>
+          }>
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<Page404 />} />
+          </Route>
+
+          <Route exact path="/" element={
+            <ProtectedRoute>
+              <ClientLayout />
+            </ProtectedRoute>
+          }>
             <Route index element={<Home />} />
-            {/* <Route path="item" element={<ItemList />} />
-            <Route path="blog" element={<Blog />} />
-            <Route path="help" element={<Help />} />
-            <Route path="term" element={<Term />} /> */}
-            {/* <Route
-              path="login"
-              element={
-                <AuthRoute>
-                  <Login />
-                </AuthRoute>
-              }
-            /> */}
+            <Route path="search" element={<Search />} />
+            <Route path="friend" element={<FriendRequest />} />
+            <Route path="message" element={<Message />} />
+            <Route path="notification" element={<Notification />} />
+            <Route path="user/:userid" element={<Profile />} />
+            <Route path="setting" element={<UserSetting />} />
             <Route path="*" element={<Page404 />} />
           </Route>
         </Routes>

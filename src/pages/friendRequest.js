@@ -1,9 +1,9 @@
 import React from "react";
 
-export const FriendReq = () => {
+export const FriendRequest = () => {
   return (
     <div className="">
-      <p>FriendReq</p>
+      <p>FriendRequest</p>
     </div>
   );
 };
