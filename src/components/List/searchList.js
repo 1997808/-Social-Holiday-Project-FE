@@ -1,0 +1,20 @@
+import React from "react";
+import { SearchUser } from "../Card/searchUser";
+
+export const SearchList = () => {
+  return (
+    <div className="w-full h-full">
+      {/* <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t">
+        <p className="text-lg font-bold text-white">Conversation</p>
+      </div> */}
+      <div className="grid grid-cols-3 lg:grid-cols-4 gap-8">
+        <SearchUser />
+        <SearchUser />
+        <SearchUser />
+        <SearchUser />
+        <SearchUser />
+        <SearchUser />
+      </div>
+    </div>
+  );
+};
