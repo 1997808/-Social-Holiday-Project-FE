@@ -7,14 +7,7 @@ export const FriendMessageActiveList = () => {
       <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t">
         <p className="text-lg font-bold text-white">Chats</p>
       </div>
-      <div className="overflow-y-scroll" style={{ maxHeight: "80vh" }}>
-        <FriendMessageCard />
-        <FriendMessageCard />
-        <FriendMessageCard />
-        <FriendMessageCard />
-        <FriendMessageCard />
-        <FriendMessageCard />
-        <FriendMessageCard />
+      <div className="overflow-y-scroll" style={{ height: "80vh" }}>
         <FriendMessageCard />
         <FriendMessageCard />
         <FriendMessageCard />

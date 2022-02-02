@@ -1,4 +1,5 @@
 import React from "react";
+import { ChatBox } from "../components/List/chatBox";
 import { FriendMessageActiveList } from "../components/List/friendMessageActiveList";
 
 export const Message = () => {
@@ -8,7 +9,7 @@ export const Message = () => {
         <FriendMessageActiveList />
       </div>
       <div className="col-span-2">
-
+        <ChatBox />
       </div>
     </div>
   );
