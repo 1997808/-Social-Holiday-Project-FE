@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { Header } from "../../components/header";
-import { Footer } from "../../components/footer";
+// import { Footer } from "../../components/footer";
 
 export const ClientLayout = () => {
   return (
@@ -11,7 +11,6 @@ export const ClientLayout = () => {
         <div className="flex flex-grow mt-16">
           <Outlet />
         </div>
-        <Footer />
       </div>
     </>
   );

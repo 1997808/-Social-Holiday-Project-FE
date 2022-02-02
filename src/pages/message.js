@@ -1,9 +1,15 @@
 import React from "react";
+import { FriendMessageActiveList } from "../components/List/friendMessageActiveList";
 
 export const Message = () => {
   return (
-    <div className="">
-      <p>Message</p>
+    <div className="container mx-auto grid grid-cols-3 xl:grid-cols-4 gap-8 mt-8">
+      <div className="col-span-1">
+        <FriendMessageActiveList />
+      </div>
+      <div className="col-span-2">
+
+      </div>
     </div>
   );
 };

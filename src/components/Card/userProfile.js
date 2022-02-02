@@ -9,7 +9,7 @@ export const UserProfile = ({ image, profileImage, name }) => {
       <img className="h-48 w-full rounded-b object-cover" src={bg2} alt="" />
       <div className="px-5">
         <div className="-mt-12 mb-2 flex justify-between items-end">
-          <img className="h-24 w-24 object-cover border-2 border-solid border-white rounded" src={profile} alt="" />
+          <img className="h-20 w-20 object-cover border-2 border-solid border-white rounded" src={profile} alt="" />
           <PencilAltIcon className="w-5 h-5 text-logo-orange" />
         </div>
         <div className="pb-5">

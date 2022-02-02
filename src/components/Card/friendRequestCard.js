@@ -1,12 +1,11 @@
 import React from "react";
-import bg2 from "../../assets/bg-1.jpg"
 import profile from "../../assets/profile.jpg"
 import { ButtonSmall } from "../Button/buttonSmall";
 import { ButtonInvert } from "../Button/buttonInvert"
 
 export const FriendRequestCard = ({ image, profileImage, name }) => {
   return (
-    <div className="w-full h-auto flex justify-center items-center bg-white rounded p-5">
+    <div className="w-full h-auto flex justify-center bg-white rounded p-5">
       <img className="h-16 w-16 rounded object-cover" src={profile} alt="" />
       <div className="pl-5 flex flex-col">
         <p className="font-bold">Gamer123</p>

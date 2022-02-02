@@ -1,4 +1,3 @@
-import { ChatAltIcon, HeartIcon } from "@heroicons/react/solid";
 import React from "react";
 import logo from "../../assets/logo-2.svg"
 import { PostStat } from "./postStat";

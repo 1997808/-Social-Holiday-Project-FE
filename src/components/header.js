@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { UserIcon, BellIcon, ChatAlt2Icon, SearchIcon, UserGroupIcon, HomeIcon, UserAddIcon } from '@heroicons/react/solid'
+import { UserIcon, BellIcon, ChatAlt2Icon, SearchIcon, HomeIcon, UserAddIcon } from '@heroicons/react/solid'
 import logo from "../assets/logo-2.svg"
 
 export const Header = () => {
