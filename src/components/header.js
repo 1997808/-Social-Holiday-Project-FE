@@ -35,7 +35,7 @@ export const Header = () => {
             <Link to="/notification">
               <BellIcon className="h-6 w-6 mx-8 my-2" />
             </Link>
-            <Link to="/setting">
+            <Link to="/user/1">
               <UserIcon className="h-6 w-6 mx-8 my-2" />
             </Link>
           </div>

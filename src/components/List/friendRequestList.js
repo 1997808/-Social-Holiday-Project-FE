@@ -7,7 +7,13 @@ export const FriendRequestList = () => {
       <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t">
         <p className="text-lg font-bold text-white">Friend Request</p>
       </div>
-      <div className="grid grid-cols-1">
+      <div className="overflow-y-scroll" style={{ maxHeight: "80vh" }}>
+        <FriendRequestCard />
+        <FriendRequestCard />
+        <FriendRequestCard />
+        <FriendRequestCard />
+        <FriendRequestCard />
+        <FriendRequestCard />
         <FriendRequestCard />
         <FriendRequestCard />
         <FriendRequestCard />

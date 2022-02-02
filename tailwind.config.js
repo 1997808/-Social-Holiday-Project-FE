@@ -7,6 +7,9 @@ module.exports = {
       colors: {
         'logo-orange': '#ff7555',
       },
+      spacing: {
+        '128': '32rem',
+      }
     },
   },
   plugins: [],
