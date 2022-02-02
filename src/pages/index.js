@@ -11,7 +11,9 @@ export const Home = () => {
         <SideProfile />
       </div>
       <div className="col-span-2">
-        <PostForm />
+        <div className="mb-8">
+          <PostForm />
+        </div>
         <NewsFeed />
       </div>
       <div className="col-span-1">
