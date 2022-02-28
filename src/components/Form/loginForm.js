@@ -13,19 +13,20 @@ export const LoginForm = () => {
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data)
-    // await MyAxios.post(`user/login.php`, data)
-    //   .then((res) => {
-    //     if (res.data) {
-    //       dispatch(login());
-    //       navigate("../", { replace: true });
-    //     } else {
-    //       console.log("fail");
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    await MyAxios.post(`auth/login`, data)
+      .then((res) => {
+        if (res.data.access_token) {
+          localStorage.setItem("token", res.data.access_token);
+          dispatch(login());
+          navigate("../", { replace: true });
+        } else {
+          
+          console.log("fail");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
