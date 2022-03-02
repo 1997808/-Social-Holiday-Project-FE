@@ -30,6 +30,7 @@ function App() {
           if (res.data) {
             dispatch(login());
           } else {
+            localStorage.removeItem("token");
             dispatch(logOut());
           }
         })
