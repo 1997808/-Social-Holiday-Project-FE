@@ -3,15 +3,13 @@ import logo from "../../assets/logo-2.svg";
 import { useForm } from "react-hook-form";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { MyAxios } from "../../utils/api";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export const PostForm = ({ image }) => {
   const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
+  let user = useSelector((state) => state.user);
   const onSubmit = async (data) => {
-    await MyAxios.post(`posts`, data)
+    await MyAxios.post(`posts`, { author: user.id, ...data })
       .then((res) => {
         if (res) {
           console.log(res);

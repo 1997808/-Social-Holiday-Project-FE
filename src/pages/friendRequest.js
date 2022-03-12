@@ -13,7 +13,7 @@ export const FriendRequest = () => {
         <div className="mb-8">
           <UserProfile />
         </div>
-        <NewsFeed />
+        <NewsFeed data={[]} />
       </div>
     </div>
   );
