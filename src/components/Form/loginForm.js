@@ -6,6 +6,7 @@ import { input_normal } from "../../utils/css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../app/auth";
+import { setUser } from "../../app/user";
 import { MyAxios } from "../../utils/api";
 
 export const LoginForm = () => {
@@ -18,6 +19,7 @@ export const LoginForm = () => {
       .then((res) => {
         if (res.data.accessToken) {
           localStorage.setItem("token", res.data.accessToken);
+          dispatch(setUser(res.data.user));
           dispatch(login());
           navigate("../", { replace: true });
         } else {

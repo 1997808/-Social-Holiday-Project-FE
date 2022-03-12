@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { ScrollToTop, ProtectedRoute, AuthRoute } from "./utils/CustomRoute";
 import { ClientLayout } from "./pages/layout/client";
 import { ClearLayout } from "./pages/layout/clear";
@@ -17,6 +17,7 @@ import { Search } from "./pages/search";
 import { UserSetting } from "./pages/userSetting";
 import { MyAxios } from "./utils/api";
 import { login, logOut } from "./app/auth";
+import { resetUser, setUser } from "./app/user";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,9 +30,11 @@ function App() {
         .then((res) => {
           if (res.data) {
             dispatch(login());
+            dispatch(setUser(res.data.user));
           } else {
             localStorage.removeItem("token");
             dispatch(logOut());
+            dispatch(resetUser());
           }
         })
         .catch((error) => {
