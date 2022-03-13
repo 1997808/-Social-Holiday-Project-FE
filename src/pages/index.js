@@ -10,7 +10,7 @@ export const Home = () => {
   const user = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
-    const checkLogin = async () => {
+    const getPosts = async () => {
       await MyAxios.get("posts")
         .then((res) => {
           if (res.data) {
@@ -23,7 +23,7 @@ export const Home = () => {
           console.log(error);
         });
     };
-    checkLogin();
+    getPosts();
   }, []);
 
   return (

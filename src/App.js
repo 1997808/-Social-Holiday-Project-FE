@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
 import { ScrollToTop, ProtectedRoute, AuthRoute } from "./utils/CustomRoute";
 import { ClientLayout } from "./pages/layout/client";
 import { ClearLayout } from "./pages/layout/clear";
@@ -18,11 +23,12 @@ import { UserSetting } from "./pages/userSetting";
 import { MyAxios } from "./utils/api";
 import { login, logOut } from "./app/auth";
 import { resetUser, setUser } from "./app/user";
+import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
   // const isAuth = useSelector((state) => state.auth);
-  // localStorage.clear();
+  console.log(localStorage.getItem("token"));
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -53,20 +59,6 @@ function App() {
             exact
             path="/"
             element={
-              <AuthRoute>
-                <ClearLayout />
-              </AuthRoute>
-            }
-          >
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<Page404 />} />
-          </Route>
-
-          <Route
-            exact
-            path="/"
-            element={
               <ProtectedRoute>
                 <ClientLayout />
               </ProtectedRoute>
@@ -79,6 +71,18 @@ function App() {
             <Route path="notification" element={<Notification />} />
             <Route path="user/:userid" element={<Profile />} />
             <Route path="setting" element={<UserSetting />} />
+            <Route path="*" element={<Page404 />} />
+          </Route>
+          <Route
+            path="/auth"
+            element={
+              <AuthRoute>
+                <ClearLayout />
+              </AuthRoute>
+            }
+          >
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
             <Route path="*" element={<Page404 />} />
           </Route>
         </Routes>

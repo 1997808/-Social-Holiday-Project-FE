@@ -16,9 +16,8 @@ export const SignupForm = () => {
     await MyAxios.post(`auth/signup`, data)
       .then((res) => {
         if (res.data.accessToken) {
-          localStorage.setItem("token", res.data.accessToken);
           dispatch(login());
-          navigate("../", { replace: true });
+          navigate("/auth/login", { replace: true });
         } else {
           console.log("fail");
         }
@@ -83,7 +82,7 @@ export const SignupForm = () => {
             <p className="text-xs">
               If you have an account?{" "}
               <span className="text-logo-orange">
-                <Link to="/login">Login now</Link>
+                <Link to="/auth/login">Login now</Link>
               </span>
             </p>
           </div>

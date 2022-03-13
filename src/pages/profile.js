@@ -16,7 +16,7 @@ export const Profile = () => {
       <div className="container mx-auto grid grid-cols-4 gap-8">
         <div></div>
         <div className="col-span-2">
-          <NewsFeed />
+          <NewsFeed data={[]} />
         </div>
       </div>
     </div>

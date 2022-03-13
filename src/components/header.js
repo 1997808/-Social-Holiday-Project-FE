@@ -1,9 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { UserIcon, BellIcon, ChatAlt2Icon, SearchIcon, HomeIcon, UserAddIcon } from '@heroicons/react/solid'
-import logo from "../assets/logo-2.svg"
+import {
+  UserIcon,
+  BellIcon,
+  ChatAlt2Icon,
+  SearchIcon,
+  HomeIcon,
+  UserAddIcon,
+} from "@heroicons/react/solid";
+import logo from "../assets/logo-2.svg";
+import { useDispatch } from "react-redux";
+import { logOut } from "../app/auth";
 
 export const Header = () => {
+  const dispatch = useDispatch();
+  const logOutButton = () => {
+    localStorage.clear();
+    dispatch(logOut());
+  };
   return (
     <div className="fixed z-30 top-0 left-0 w-full h-auto">
       <div className="h-16 bg-opacity-90 bg-gray-900"></div>
@@ -38,6 +52,9 @@ export const Header = () => {
             <Link to="/user/1">
               <UserIcon className="h-6 w-6 mx-8 my-2" />
             </Link>
+            <div onClick={() => logOutButton()}>
+              <UserIcon className="h-6 w-6 mx-8 my-2" />
+            </div>
           </div>
         </div>
       </div>

@@ -18,10 +18,15 @@ export const LoginForm = () => {
     await MyAxios.post(`auth/login`, data)
       .then((res) => {
         if (res.data.accessToken) {
-          localStorage.setItem("token", res.data.accessToken);
-          dispatch(setUser(res.data.user));
           dispatch(login());
-          navigate("../", { replace: true });
+          dispatch(setUser(res.data.user));
+          localStorage.setItem("token", res.data.accessToken);
+          MyAxios.interceptors.request.use(function (config) {
+            const token = localStorage.getItem("token");
+            config.headers.Authorization = token ? `Bearer ${token}` : "";
+            return config;
+          });
+          navigate("/");
         } else {
           console.log("fail");
         }
@@ -64,7 +69,7 @@ export const LoginForm = () => {
             <p className="text-xs">
               Don’t have an account?{" "}
               <span className="text-logo-orange">
-                <Link to="/signup">Register now</Link>
+                <Link to="/auth/signup">Register now</Link>
               </span>
             </p>
           </div>
