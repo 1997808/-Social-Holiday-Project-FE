@@ -6,13 +6,13 @@ import { MyAxios } from "../../utils/api";
 import { useSelector } from "react-redux";
 
 export const PostForm = ({ image }) => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   let user = useSelector((state) => state.user);
   const onSubmit = async (data) => {
     await MyAxios.post(`posts`, { author: user.id, ...data })
       .then((res) => {
-        if (res) {
-          console.log(res);
+        if (res.statusText === "Created") {
+          reset({ content: "" });
         } else {
           console.log("fail");
         }

@@ -28,7 +28,6 @@ import { useDispatch } from "react-redux";
 function App() {
   const dispatch = useDispatch();
   // const isAuth = useSelector((state) => state.auth);
-  console.log(localStorage.getItem("token"));
 
   useEffect(() => {
     const checkLogin = async () => {
