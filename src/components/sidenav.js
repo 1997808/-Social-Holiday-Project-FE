@@ -8,7 +8,6 @@ import {
   HomeIcon,
   UserAddIcon,
   LogoutIcon,
-  DotsHorizontalIcon,
 } from "@heroicons/react/outline";
 import logo from "../assets/logo-2.svg";
 import { useDispatch } from "react-redux";
