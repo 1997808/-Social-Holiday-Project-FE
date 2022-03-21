@@ -24,6 +24,7 @@ import { MyAxios } from "./utils/api";
 import { login, logOut } from "./app/auth";
 import { resetUser, setUser } from "./app/user";
 import { useDispatch } from "react-redux";
+import { NavLayout } from "./pages/layout/nav";
 
 function App() {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ function App() {
             path="/"
             element={
               <ProtectedRoute>
-                <ClientLayout />
+                <NavLayout />
               </ProtectedRoute>
             }
           >

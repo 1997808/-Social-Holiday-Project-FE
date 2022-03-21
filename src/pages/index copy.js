@@ -27,21 +27,19 @@ export const Home = () => {
   }, []);
 
   return (
-    <>
-      <div className="flex-grow border-l border-r border-solid border-gray-200 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
-        {/* <div className="hidden lg:block lg:col-span-1">
+    <div className="container mx-auto grid grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
+      <div className="hidden lg:block lg:col-span-1">
         <SideProfile name={user.name} username={user.username} />
-      </div> */}
-        <div className="w-full">
-          <div className="mb-8">
-            <PostForm />
-          </div>
-          <NewsFeed data={posts} />
-        </div>
       </div>
-      <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] p-2 fixed h-full">
+      <div className="col-span-2">
+        <div className="mb-8">
+          <PostForm />
+        </div>
+        <NewsFeed data={posts} />
+      </div>
+      <div className="col-span-1">
         <FriendActiveList />
       </div>
-    </>
+    </div>
   );
 };
