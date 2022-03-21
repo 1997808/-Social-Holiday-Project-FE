@@ -4,7 +4,7 @@ import { SearchUser } from "../Card/searchUser";
 export const SearchList = () => {
   return (
     <div className="w-full h-full">
-      <div className="grid grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
         <SearchUser />
         <SearchUser />
         <SearchUser />

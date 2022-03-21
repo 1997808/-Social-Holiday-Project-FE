@@ -12,7 +12,7 @@ export const FriendRequest = () => {
         </div>
         <NewsFeed data={[]} />
       </div>
-      <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] fixed h-full">
+      <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] px-2 fixed h-full">
         <FriendRequestList />
       </div>
     </>
