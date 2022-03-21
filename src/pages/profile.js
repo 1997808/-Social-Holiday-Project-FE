@@ -1,24 +1,22 @@
 import React from "react";
 import { UserProfile } from "../components/Card/userProfile";
+import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
 
 export const Profile = () => {
   return (
-    <div className="w-full h-full">
-      <div className="mb-8 bg-white">
-        <div className="container mx-auto grid grid-cols-4 gap-8">
-          <div></div>
-          <div className="col-span-2">
+    <>
+      <div className="flex-grow border-l border-r border-solid border-gray-200 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
+        <div className="w-full">
+          <div className="mb-8">
             <UserProfile />
           </div>
-        </div>
-      </div>
-      <div className="container mx-auto grid grid-cols-4 gap-8">
-        <div></div>
-        <div className="col-span-2">
           <NewsFeed data={[]} />
         </div>
       </div>
-    </div>
+      {/* <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] px-2 fixed h-screen">
+        <FriendActiveList />
+      </div> */}
+    </>
   );
 };
