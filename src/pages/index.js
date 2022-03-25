@@ -10,10 +10,10 @@ export const Home = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getPosts = async () => {
-      await MyAxios.get("posts")
+      await MyAxios.get("posts/all")
         .then((res) => {
           if (res.data) {
-            setPosts(res.data);
+            setPosts(res.data.data);
           } else {
           }
         })

@@ -2,22 +2,22 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
 import { input_normal } from "../../utils/css";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../app/auth";
+// import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+// import { login } from "../../app/auth";
 import { MyAxios } from "../../utils/api";
 
 export const SignupForm = () => {
   const { register, handleSubmit } = useForm();
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // let navigate = useNavigate();
 
   const onSubmit = async (data) => {
     await MyAxios.post(`auth/signup`, data)
       .then((res) => {
         if (res.data.accessToken) {
-          dispatch(login());
-          navigate("/auth/login", { replace: true });
+          // dispatch(login());
+          // navigate("/auth/login", { replace: true });
         } else {
           console.log("fail");
         }
