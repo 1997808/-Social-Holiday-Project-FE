@@ -1,15 +1,20 @@
 import React from "react";
 import { SearchUser } from "../Card/searchUser";
 
-export const SearchList = () => {
+export const SearchList = ({ data }) => {
+  console.log(data);
   return (
     <div className="w-full h-full">
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
-        <SearchUser />
-        <SearchUser />
-        <SearchUser />
-        <SearchUser />
-        <SearchUser />
+      <div className="grid grid-cols-2 gap-8">
+        {data &&
+          data.map((item) => (
+            <SearchUser
+              key={item.createdAt}
+              userId={item.id}
+              name={item.name}
+              username={item.username}
+            />
+          ))}
       </div>
     </div>
   );
