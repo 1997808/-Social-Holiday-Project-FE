@@ -15,11 +15,12 @@ export const SignupForm = () => {
   const onSubmit = async (data) => {
     await MyAxios.post(`auth/signup`, data)
       .then((res) => {
-        if (res.data.accessToken) {
+        if (res.data.message === "success") {
           // dispatch(login());
           // navigate("/auth/login", { replace: true });
+          console.log(res.data.message);
         } else {
-          console.log("fail");
+          console.log(res.data.message);
         }
       })
       .catch((error) => {

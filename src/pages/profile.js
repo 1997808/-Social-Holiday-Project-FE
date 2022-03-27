@@ -1,6 +1,6 @@
 import React from "react";
 import { UserProfile } from "../components/Card/userProfile";
-import { FriendActiveList } from "../components/List/friendActiveList";
+// import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
 
 export const Profile = () => {

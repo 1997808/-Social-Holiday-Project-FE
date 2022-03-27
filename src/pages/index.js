@@ -3,10 +3,10 @@ import { PostForm } from "../components/Form/postForm";
 import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
 import { MyAxios } from "../utils/api";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 export const Home = () => {
-  const user = useSelector((state) => state.user);
+  // const user = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getPosts = async () => {
@@ -18,7 +18,6 @@ export const Home = () => {
           }
         })
         .catch((error) => {
-          // handle error
           console.log(error);
         });
     };
