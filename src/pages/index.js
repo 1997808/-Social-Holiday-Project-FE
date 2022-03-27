@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { PostForm } from "../components/Form/postForm";
-import { FriendActiveList } from "../components/List/friendActiveList";
+// import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
 import { MyAxios } from "../utils/api";
 // import { useSelector } from "react-redux";
