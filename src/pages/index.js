@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { PostForm } from "../components/Form/postForm";
-// import { FriendActiveList } from "../components/List/friendActiveList";
+import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
 import { MyAxios } from "../utils/api";
-// import { useSelector } from "react-redux";
 
 export const Home = () => {
-  // const user = useSelector((state) => state.user);
   const [posts, setPosts] = useState([]);
+  const [friends, setFriends] = useState([]);
   useEffect(() => {
     const getPosts = async () => {
       await MyAxios.get("posts/all")
         .then((res) => {
           if (res.data) {
             setPosts(res.data.data);
-          } else {
           }
         })
         .catch((error) => {
@@ -22,6 +20,21 @@ export const Home = () => {
         });
     };
     getPosts();
+  }, []);
+
+  useEffect(() => {
+    const getFriend = async () => {
+      await MyAxios.get("friendships/friend")
+        .then((res) => {
+          if (res.data) {
+            setFriends(res.data);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getFriend();
   }, []);
 
   return (
@@ -34,9 +47,9 @@ export const Home = () => {
           <NewsFeed data={posts} />
         </div>
       </div>
-      {/* <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] px-2 fixed h-screen">
-        <FriendActiveList />
-      </div> */}
+      <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] px-2 fixed h-screen">
+        <FriendActiveList data={friends} />
+      </div>
     </>
   );
 };
