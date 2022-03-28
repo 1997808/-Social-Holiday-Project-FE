@@ -3,24 +3,25 @@ import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
 import { input_normal } from "../../utils/css";
 // import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { login } from "../../app/auth";
 import { MyAxios } from "../../utils/api";
 
 export const SignupForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors }, setError } = useForm();
   // const dispatch = useDispatch();
-  // let navigate = useNavigate();
+  let navigate = useNavigate();
 
   const onSubmit = async (data) => {
     await MyAxios.post(`auth/signup`, data)
       .then((res) => {
         if (res.data.message === "success") {
-          // dispatch(login());
-          // navigate("/auth/login", { replace: true });
-          console.log(res.data.message);
+          setTimeout(() => {
+            navigate("/auth/login", { replace: true });
+          }, 1500)
+          setError("email", { type: "success", message: res.data.message });
         } else {
-          console.log(res.data.message);
+          setError("email", { type: "failed", message: res.data.message });
         }
       })
       .catch((error) => {
@@ -69,6 +70,8 @@ export const SignupForm = () => {
               className={input_normal}
             />
           </div>
+
+          {errors.email && <p className={`${errors.email.type === "success" ? "text-green-500" : "text-red-500"} text-xs mb-4 lg:mb-6`}>{errors.email.message}</p>}
 
           <div className="mb-4">
             <p className="text-xs">

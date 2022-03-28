@@ -10,7 +10,7 @@ import { setUser } from "../../app/user";
 import { MyAxios } from "../../utils/api";
 
 export const LoginForm = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setError, formState: { errors } } = useForm();
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -28,7 +28,7 @@ export const LoginForm = () => {
           });
           navigate("/");
         } else {
-          console.log("fail");
+          setError("email", { type: "failed", message: res.data });
         }
       })
       .catch((error) => {
@@ -59,6 +59,9 @@ export const LoginForm = () => {
               className={input_normal}
             />
           </div>
+
+          {errors.email && <p className={`${errors.email.type === "success" ? "text-green-500" : "text-red-500"} text-xs mb-4 lg:mb-6`}>{errors.email.message}</p>}
+
           <Button text={"Login"} type="submit" />
 
           <div className="mt-4">
