@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import bg2 from "../../assets/bg-1.jpg";
 import profile from "../../assets/profile.jpg";
 import { ButtonSmall } from "../Button/buttonSmall";
@@ -6,15 +6,15 @@ import { ButtonInvert } from "../Button/buttonInvert";
 import { MyAxios } from "../../utils/api";
 
 export const SearchUser = ({ userId, name, username, image, profileImage }) => {
+  const [friend, setFriend] = useState(false);
   const addFriend = async (id) => {
     await MyAxios.post(`friendships`, { receiver: id })
       .then((res) => {
         if (res.data.message === "success") {
-          // dispatch(login());
-          // navigate("/auth/login", { replace: true });
-          console.log(res.data.message);
+          setFriend(true)
         } else {
           console.log(res.data.message);
+          setFriend(true)
         }
       })
       .catch((error) => {
@@ -37,8 +37,9 @@ export const SearchUser = ({ userId, name, username, image, profileImage }) => {
           <div className="grid grid-cols-2 gap-4 mb-5">
             <ButtonSmall
               onClick={() => addFriend(userId)}
-              text={"Add friend"}
+              text={friend ? "Pending" : "Add friend"}
               type="button"
+              disable={friend ? true : false}
             />
             <ButtonInvert text={"Follow"} type="button" />
           </div>

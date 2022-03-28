@@ -10,6 +10,7 @@ export const FriendRequestList = ({ data }) => {
       {data.map((item) => (
         <FriendRequestCard
           key={item.createdAt}
+          id={item.id}
           userId={item.creator.id}
           name={item.creator.name}
           username={item.creator.username}

@@ -2,7 +2,6 @@ import React from "react";
 import { SearchUser } from "../Card/searchUser";
 
 export const SearchList = ({ data }) => {
-  console.log(data);
   return (
     <div className="w-full h-full">
       <div className="grid grid-cols-2 gap-8">
