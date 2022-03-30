@@ -23,7 +23,7 @@ export const PostForm = ({ image }) => {
   };
 
   return (
-    <div className="w-full h-auto flex bg-white rounded p-5">
+    <div className="w-full h-auto flex bg-white rounded border-b border-solid border-gray-200 p-5">
       <img
         className="h-10 w-10 rounded object-cover mr-5"
         src={logo}

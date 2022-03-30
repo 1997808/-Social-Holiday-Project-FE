@@ -6,14 +6,14 @@ import { dateFormater } from "../../utils/formatData";
 export const PostContent = ({ image, name, username, date, content }) => {
   return (
     <>
-      <div className="w-full h-auto flex bg-white rounded-t border-b border-solid border-gray-200 p-5">
+      <div className="w-full h-auto flex bg-white rounded-t p-5">
         <img
           className="h-10 w-10 rounded object-cover mr-5"
           src={logo}
           alt="logo"
         />
         <div className="w-full flex flex-col">
-          <p className="font-bold">
+          <p className="text-sm font-bold">
             {name ? name : "Player1"}{" "}
             <span className="text-xs font-light">
               @{username ? username : "user1"}
@@ -29,7 +29,7 @@ export const PostContent = ({ image, name, username, date, content }) => {
           </p>
         </div>
       </div>
-      <div className="mb-8">
+      <div className="border-b border-solid border-gray-200">
         <PostStat radius={"rounded-b"} />
       </div>
     </>

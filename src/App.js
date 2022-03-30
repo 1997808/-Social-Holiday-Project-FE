@@ -69,7 +69,7 @@ function App() {
             <Route path="friend" element={<FriendRequest />} />
             <Route path="message" element={<Message />} />
             <Route path="notification" element={<Notification />} />
-            <Route path="user/:userid" element={<Profile />} />
+            <Route path="user" element={<Profile />} />
             <Route path="setting" element={<UserSetting />} />
             <Route path="*" element={<Page404 />} />
           </Route>

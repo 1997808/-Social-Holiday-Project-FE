@@ -26,13 +26,12 @@ export const Profile = () => {
     };
     getUserProfile();
   }, [userId]);
+
   return (
     <>
       <div className="flex-grow border-l border-r border-solid border-gray-200 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
         <div className="w-full">
-          <div className="mb-8">
-            <UserProfile data={user} />
-          </div>
+          <UserProfile data={user} />
           <ProfileFeed data={posts} author={user} />
         </div>
       </div>

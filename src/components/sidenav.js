@@ -43,7 +43,7 @@ export const Sidenav = () => {
             text={"Notification"}
             link={"/notification"}
           />
-          <SidebarLink Icon={UserIcon} text={"Profile"} link={"/user/1"} />
+          <SidebarLink Icon={UserIcon} text={"Profile"} link={"/user"} />
         </div>
         <div
           className="space-y-2.5 mt-4 mb-2.5 xl:ml-24"

@@ -6,7 +6,7 @@ import profileImage from "../../assets/profile.jpg";
 export const UserProfile = ({ data }) => {
   const { name, username, profile } = data
   return (
-    <div className="w-full h-auto bg-white rounded-b">
+    <div className="w-full h-auto bg-white rounded-b border-b border-solid border-gray-200">
       <img className="h-48 w-full rounded-b object-cover" src={bg2} alt="" />
       <div className="px-5">
         <div className="-mt-12 mb-2 flex justify-between items-end">

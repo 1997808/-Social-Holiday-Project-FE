@@ -13,7 +13,6 @@ export const Search = () => {
         .then((res) => {
           if (res.data) {
             setUsers(res.data.data);
-          } else {
           }
         })
         .catch((error) => {
