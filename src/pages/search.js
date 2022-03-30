@@ -9,7 +9,7 @@ export const Search = () => {
 
   useEffect(() => {
     const getUsers = async () => {
-      await MyAxios.post("users/all", { keyword })
+      await MyAxios.post("users/search", { keyword })
         .then((res) => {
           if (res.data) {
             setUsers(res.data.data);
@@ -17,7 +17,6 @@ export const Search = () => {
           }
         })
         .catch((error) => {
-          // handle error
           console.log(error);
         });
     };

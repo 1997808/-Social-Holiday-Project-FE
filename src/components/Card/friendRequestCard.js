@@ -4,7 +4,7 @@ import { ButtonSmall } from "../Button/buttonSmall";
 import { ButtonInvert } from "../Button/buttonInvert";
 import { MyAxios } from "../../utils/api";
 
-export const FriendRequestCard = ({ id, image, name, username }) => {
+export const FriendRequestCard = ({ id, userId, image, name, username, checkUserProfile }) => {
   const [review, setReview] = useState(false);
   const acceptFriendRequest = async (id) => {
     await MyAxios.post(`friendships/acceptFriendRequest`, { id })
@@ -30,7 +30,7 @@ export const FriendRequestCard = ({ id, image, name, username }) => {
       });
   };
   return (
-    <div className="w-full h-auto flex justify-center bg-white rounded p-5">
+    <div className="w-full h-auto flex justify-center bg-white rounded p-5" onClick={() => checkUserProfile(userId)}>
       <img className="h-14 w-14 rounded object-cover" src={profile} alt="" />
       <div className="pl-5 flex flex-col">
         <p className="font-bold">{name}</p>
