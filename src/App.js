@@ -36,6 +36,7 @@ function App() {
       await MyAxios.get("auth/checkLogin")
         .then((res) => {
           if (res.data) {
+            // console.log(res.data)
             dispatch(login());
             dispatch(setUser(res.data.user));
           } else {

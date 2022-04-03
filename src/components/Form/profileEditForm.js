@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
 import { input_normal } from "../../utils/css";
@@ -12,26 +12,53 @@ export const ProfileEditForm = () => {
   // const dispatch = useDispatch();
   let navigate = useNavigate();
 
+  const [selectedFile, setSelectedFile] = useState();
+  const [isFilePicked, setIsFilePicked] = useState(false);
+
+  const changeHandler = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setIsFilePicked(true);
+  };
+
+  const handleSubmission = () => {
+    console.log(selectedFile)
+  };
+
   const onSubmit = async (data) => {
-    await MyAxios.post(`auth/signup`, data)
-      .then((res) => {
-        if (res.data.message === "success") {
-          setTimeout(() => {
-            navigate("/auth/login", { replace: true });
-          }, 1500)
-          setError("email", { type: "success", message: res.data.message });
-        } else {
-          setError("email", { type: "failed", message: res.data.message });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // await MyAxios.post(`auth/signup`, data)
+    //   .then((res) => {
+    //     if (res.data.message === "success") {
+    //       setTimeout(() => {
+    //         navigate("/auth/login", { replace: true });
+    //       }, 1500)
+    //       setError("email", { type: "success", message: res.data.message });
+    //     } else {
+    //       setError("email", { type: "failed", message: res.data.message });
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   return (
     <>
-      <div className="w-full p-8 rounded h-full flex justify-between items-center bg-white">
+      <div className="w-full p-8 rounded h-full flex flex-col justify-between items-center bg-white">
+        <div className="mb-16">
+          <input type="file" name="file" onChange={changeHandler} />
+          {isFilePicked ? (
+            <div>
+              <p>Filename: {selectedFile.name}</p>
+              <p>Filetype: {selectedFile.type}</p>
+              <p>Size: {Math.ceil(selectedFile.size / 1000)}KB</p>
+            </div>
+          ) : (
+            <p>Select a file to show details</p>
+          )}
+          <div>
+            <Button text={"Change profile picture"} onClick={isFilePicked ? handleSubmission : () => { }} />
+          </div>
+        </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col justify-between items-center"
@@ -71,25 +98,17 @@ export const ProfileEditForm = () => {
             />
           </div>
 
+          <div className="w-full mb-4 lg:mb-6">
+            <textarea
+              type="text"
+              placeholder="Profile"
+              {...register("profile", { required: true })}
+              className="text-sm w-full focus:outline-none border border-gray-200 rounded px-4 py-2 mr-5"
+            />
+          </div>
+
           {errors.email && <p className={`${errors.email.type === "success" ? "text-green-500" : "text-red-500"} text-xs mb-4 lg:mb-6`}>{errors.email.message}</p>}
-
-          <div className="mb-4">
-            <p className="text-xs">
-              By clicking Sign Up, you agree to our Terms, Data Policy and
-              Cookie Policy. You may receive Email notifications from us and can
-              opt out at any time.
-            </p>
-          </div>
-
-          <Button text={"Register"} type="submit" />
-          <div className="mt-8">
-            <p className="text-xs">
-              If you have an account?{" "}
-              <span className="text-logo-orange">
-                <Link to="/auth/login">Login now</Link>
-              </span>
-            </p>
-          </div>
+          <Button text={"Submit edit"} type="submit" />
         </form>
       </div>
     </>
