@@ -19,7 +19,7 @@ import { Message } from "./pages/message";
 import { Notification } from "./pages/notification";
 import { Profile } from "./pages/profile";
 import { Search } from "./pages/search";
-import { UserSetting } from "./pages/userSetting";
+import { ProfileEdit } from "./pages/profileEdit";
 import { MyAxios } from "./utils/api";
 import { login, logOut } from "./app/auth";
 import { resetUser, setUser } from "./app/user";
@@ -69,8 +69,8 @@ function App() {
             <Route path="friend" element={<FriendRequest />} />
             <Route path="message" element={<Message />} />
             <Route path="notification" element={<Notification />} />
-            <Route path="user" element={<Profile />} />
-            <Route path="setting" element={<UserSetting />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="edit" element={<ProfileEdit />} />
             <Route path="*" element={<Page404 />} />
           </Route>
           <Route

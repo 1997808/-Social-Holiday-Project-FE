@@ -1,5 +1,6 @@
 import { PencilAltIcon } from "@heroicons/react/solid";
 import React from "react";
+import { Link } from "react-router-dom";
 import bg2 from "../../assets/bg-1.jpg";
 import profileImage from "../../assets/profile.jpg";
 
@@ -15,7 +16,9 @@ export const UserProfile = ({ data }) => {
             src={profileImage}
             alt=""
           />
-          <PencilAltIcon className="w-6 h-6 text-logo-orange" />
+          <Link to="/edit">
+            <PencilAltIcon className="w-6 h-6 text-logo-orange" />
+          </Link>
         </div>
         <div className="pb-5">
           <p className="font-bold">{name}</p>
