@@ -25,7 +25,6 @@ export const Sidenav = () => {
       <Link to="/">
         <div className="flex items-center justify-center w-14 h-14 hoverAnimation p-0 xl:ml-24">
           <img className="h-8 w-8" src={logo} alt="icon" />
-          {/* <p className="text-base">Holsome</p> */}
         </div>
       </Link>
       <div className="flex flex-col justify-between h-full">

@@ -12,6 +12,7 @@ export const SearchList = ({ data }) => {
               userId={item.id}
               name={item.name}
               username={item.username}
+              profileImageId={item.cloudinaryId}
             />
           ))}
       </div>

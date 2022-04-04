@@ -4,8 +4,9 @@ import profile from "../../assets/profile.jpg";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { ButtonInvert } from "../Button/buttonInvert";
 import { MyAxios } from "../../utils/api";
+import { Image } from "cloudinary-react";
 
-export const SearchUser = ({ userId, name, username, image, profileImage }) => {
+export const SearchUser = ({ userId, name, username, image, profileImageId }) => {
   const [friend, setFriend] = useState(false);
   const addFriend = async (id) => {
     await MyAxios.post(`friendships`, { receiver: id })
@@ -26,10 +27,11 @@ export const SearchUser = ({ userId, name, username, image, profileImage }) => {
     <div className="w-full h-auto flex flex-col bg-white rounded">
       <img className="h-20 w-full rounded-t object-cover" src={bg2} alt="" />
       <div className="flex flex-col justify-center items-center">
-        <img
+        <Image
           className="h-16 w-16 rounded object-cover -mt-10"
-          src={profile}
-          alt=""
+          cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+          publicId={profileImageId}
+          crop="scale"
         />
         <div className="p-5 flex flex-col items-center">
           <p className="font-bold">{name}</p>

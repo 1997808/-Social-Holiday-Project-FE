@@ -8,7 +8,7 @@ export const FriendActiveList = ({ data }) => {
         <p className="font-bold text-white">Conversation</p>
       </div>
       {data.map((item) => (
-        <FriendActive key={item.id} name={item.name} />
+        <FriendActive key={item.id} profileImageId={item.cloudinaryId} name={item.name} />
       ))}
     </div>
   );

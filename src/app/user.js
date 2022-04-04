@@ -4,6 +4,7 @@ const initialState = {
   id: null,
   name: null,
   username: null,
+  profileImageId: null
 };
 
 const userSlice = createSlice({
@@ -14,11 +15,13 @@ const userSlice = createSlice({
       state.id = action.payload.id;
       state.name = action.payload.name;
       state.username = action.payload.username;
+      state.profileImageId = action.payload.cloudinaryId;
     },
     resetUser: (state) => {
       state.id = null;
       state.name = null;
       state.username = null;
+      state.profileImageId = null
     },
   },
 });

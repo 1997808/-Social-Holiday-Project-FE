@@ -14,6 +14,7 @@ export const FriendRequestList = ({ data, checkUserProfile }) => {
           userId={item.creator.id}
           name={item.creator.name}
           username={item.creator.username}
+          profileImageId={item.creator.cloudinaryId}
           checkUserProfile={checkUserProfile}
         />
       ))}

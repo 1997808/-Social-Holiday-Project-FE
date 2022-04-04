@@ -11,6 +11,7 @@ export const ProfileFeed = ({ data, author }) => {
           username={author.username}
           date={item.createdAt}
           content={item.content}
+          profileImageId={author.cloudinaryId}
         />
       ))}
     </div>

@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { MyAxios } from "../../utils/api";
 import { useSelector } from "react-redux";
+import { Image } from "cloudinary-react";
 
-export const PostForm = ({ image }) => {
+export const PostForm = ({ profileImageId }) => {
   const { register, handleSubmit, reset } = useForm();
   let user = useSelector((state) => state.user);
+  console.log(user)
   const onSubmit = async (data) => {
     await MyAxios.post(`posts`, { author: user.id, ...data })
       .then((res) => {
@@ -24,11 +26,20 @@ export const PostForm = ({ image }) => {
 
   return (
     <div className="w-full h-auto flex bg-white rounded border-b border-solid border-gray-200 p-5">
-      <img
-        className="h-10 w-10 rounded object-cover mr-5"
-        src={logo}
-        alt="logo"
-      />
+      {user.profileImageId ?
+        <Image
+          className="h-14 w-14 rounded object-cover"
+          cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+          publicId={user.profileImageId}
+          crop="scale"
+        />
+        :
+        <img
+          className="h-10 w-10 rounded object-cover mr-5"
+          src={logo}
+          alt="logo"
+        />
+      }
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
         <textarea
           type="text"
