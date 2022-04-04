@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
 import { input_normal } from "../../utils/css";
 // import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import { login } from "../../app/auth";
 import { MyAxios } from "../../utils/api";
 
 export const ProfileEditForm = () => {
-  const { register, handleSubmit, formState: { errors }, setError } = useForm();
-  // const dispatch = useDispatch();
+  const { register, handleSubmit, formState: { errors }, reset, setError } = useForm();
   let navigate = useNavigate();
 
   const [selectedFile, setSelectedFile] = useState();
@@ -20,25 +19,52 @@ export const ProfileEditForm = () => {
     setIsFilePicked(true);
   };
 
-  const handleSubmission = () => {
-    console.log(selectedFile)
+  const handleSubmission = async () => {
+    const form = new FormData();
+    form.append("file", selectedFile);
+    await MyAxios.post(`users/profile/icon`, form)
+      .then((res) => {
+        if (res.data) {
+          setIsFilePicked(false);
+          // setSelectedFile(null);
+          setTimeout(() => {
+            navigate("/profile", { replace: true });
+          }, 1000)
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+  useEffect(() => {
+    const getUser = async () => {
+      await MyAxios.get(`users`)
+        .then((res) => {
+          if (res.data) {
+            reset({ ...res.data })
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getUser();
+  }, [reset]);
+
   const onSubmit = async (data) => {
-    // await MyAxios.post(`auth/signup`, data)
-    //   .then((res) => {
-    //     if (res.data.message === "success") {
-    //       setTimeout(() => {
-    //         navigate("/auth/login", { replace: true });
-    //       }, 1500)
-    //       setError("email", { type: "success", message: res.data.message });
-    //     } else {
-    //       setError("email", { type: "failed", message: res.data.message });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    await MyAxios.post(`users/profile`, data)
+      .then((res) => {
+        if (res.data) {
+          setError("email", { type: "success", message: res.data.message });
+          console.log(res.data)
+        } else {
+          setError("email", { type: "failed", message: res.data.message });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -55,9 +81,9 @@ export const ProfileEditForm = () => {
           ) : (
             <p>Select a file to show details</p>
           )}
-          <div>
-            <Button text={"Change profile picture"} onClick={isFilePicked ? handleSubmission : () => { }} />
-          </div>
+          {errors.file && <p className={`${errors.file.type === "success" ? "text-green-500" : "text-red-500"} text-xs mb-4 lg:mb-6`}>{errors.file.message}</p>}
+
+          <Button text={"Change profile picture"} onClick={isFilePicked ? handleSubmission : () => { }} />
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -93,7 +119,7 @@ export const ProfileEditForm = () => {
             <input
               type="password"
               placeholder="Password"
-              {...register("password", { required: true })}
+              {...register("password")}
               className={input_normal}
             />
           </div>

@@ -18,7 +18,7 @@ export const SignupForm = () => {
         if (res.data.message === "success") {
           setTimeout(() => {
             navigate("/auth/login", { replace: true });
-          }, 1500)
+          }, 1000)
           setError("email", { type: "success", message: res.data.message });
         } else {
           setError("email", { type: "failed", message: res.data.message });

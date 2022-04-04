@@ -12,6 +12,7 @@ export const NewsFeed = (data) => {
           username={item.author.username}
           date={item.createdAt}
           content={item.content}
+          profileImageId={item.author.cloudinaryId}
         />
       ))}
     </div>

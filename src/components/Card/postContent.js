@@ -2,15 +2,20 @@ import React from "react";
 import logo from "../../assets/logo-2.svg";
 import { PostStat } from "./postStat";
 import { dateFormater } from "../../utils/formatData";
+import {
+  Image
+} from 'cloudinary-react';
 
-export const PostContent = ({ image, name, username, date, content }) => {
+
+export const PostContent = ({ image, name, username, date, content, profileImageId }) => {
   return (
     <>
       <div className="w-full h-auto flex bg-white rounded-t p-5">
-        <img
+        <Image
           className="h-10 w-10 rounded object-cover mr-5"
-          src={logo}
-          alt="logo"
+          cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+          publicId={profileImageId}
+          crop="scale"
         />
         <div className="w-full flex flex-col">
           <p className="text-sm font-bold">
