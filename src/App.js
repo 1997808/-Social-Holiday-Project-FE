@@ -37,7 +37,6 @@ function App() {
         .then((res) => {
           if (res.data) {
             dispatch(login());
-            console.log(res.data.user)
             dispatch(setUser(res.data.user));
           } else {
             localStorage.removeItem("token");

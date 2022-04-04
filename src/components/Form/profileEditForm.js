@@ -57,7 +57,6 @@ export const ProfileEditForm = () => {
       .then((res) => {
         if (res.data) {
           setError("email", { type: "success", message: res.data.message });
-          console.log(res.data)
         } else {
           setError("email", { type: "failed", message: res.data.message });
         }

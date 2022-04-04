@@ -14,7 +14,6 @@ export const SearchUser = ({ userId, name, username, image, profileImageId }) =>
         if (res.data.message === "success") {
           setFriend(true)
         } else {
-          console.log(res.data.message);
           setFriend(true)
         }
       })
