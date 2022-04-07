@@ -1,57 +1,93 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  // useNavigate,
+} from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+import { ScrollToTop, ProtectedRoute, AuthRoute } from "./utils/CustomRoute";
+// import { ClientLayout } from "./pages/layout/client";
+import { ClearLayout } from "./pages/layout/clear";
+
+import { Home } from "./pages/index";
+import { Page404 } from "./pages/404";
+import { FriendRequest } from "./pages/friendRequest";
+import { Login } from "./pages/login";
+import { Signup } from "./pages/signup";
+import { Message } from "./pages/message";
+import { Notification } from "./pages/notification";
+import { Profile } from "./pages/profile";
+import { Search } from "./pages/search";
+import { ProfileEdit } from "./pages/profileEdit";
+import { MyAxios } from "./utils/api";
+import { login, logOut } from "./app/auth";
+import { resetUser, setUser } from "./app/user";
+import { useDispatch } from "react-redux";
+import { NavLayout } from "./pages/layout/nav";
 
 function App() {
+  const dispatch = useDispatch();
+  // const isAuth = useSelector((state) => state.auth);
+  // localStorage.removeItem("token");
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      await MyAxios.get("auth/checkLogin")
+        .then((res) => {
+          if (res.data) {
+            dispatch(login());
+            dispatch(setUser(res.data.user));
+          } else {
+            localStorage.removeItem("token");
+            dispatch(logOut());
+            dispatch(resetUser());
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    checkLogin();
+  }, [dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+    <Router>
+      <ScrollToTop>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <ProtectedRoute>
+                <NavLayout />
+              </ProtectedRoute>
+            }
           >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
+            <Route index element={<Home />} />
+            <Route path="search" element={<Search />} />
+            <Route path="friend" element={<FriendRequest />} />
+            <Route path="message" element={<Message />} />
+            <Route path="notification" element={<Notification />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="edit" element={<ProfileEdit />} />
+            <Route path="*" element={<Page404 />} />
+          </Route>
+          <Route
+            path="/auth"
+            element={
+              <AuthRoute>
+                <ClearLayout />
+              </AuthRoute>
+            }
           >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
+            <Route path="*" element={<Page404 />} />
+          </Route>
+        </Routes>
+      </ScrollToTop>
+    </Router>
   );
 }
 
