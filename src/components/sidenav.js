@@ -10,12 +10,13 @@ import {
   LogoutIcon,
 } from "@heroicons/react/outline";
 import logo from "../assets/logo-2.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../app/auth";
 import { SidebarLink } from "./Button/sidebarLink";
 
 export const Sidenav = () => {
   const dispatch = useDispatch();
+  let userId = useSelector((state) => state.user.id);
   const logOutButton = () => {
     localStorage.clear();
     dispatch(logOut());
@@ -42,7 +43,7 @@ export const Sidenav = () => {
             text={"Notification"}
             link={"/notification"}
           />
-          <SidebarLink Icon={UserIcon} text={"Profile"} link={"/profile"} />
+          <SidebarLink Icon={UserIcon} text={"Profile"} link={`/profile/${userId}`} />
         </div>
         <div
           className="space-y-2.5 mt-4 mb-2.5 xl:ml-24"
