@@ -6,11 +6,10 @@ import {
   Image
 } from 'cloudinary-react';
 
-
-export const PostContent = ({ image, name, username, date, content, profileImageId }) => {
+export const PostContent = ({ id, image, name, username, date, content, profileImageId, likes }) => {
   return (
     <>
-      <div className="w-full h-auto flex bg-white rounded-t p-5">
+      <div className="w-full h-auto flex bg-white rounded-t border-b border-solid border-gray-200 px-5 pt-5">
         {profileImageId ?
           <Image
             className="h-10 w-10 rounded object-cover mr-5"
@@ -36,10 +35,10 @@ export const PostContent = ({ image, name, username, date, content, profileImage
               ? content
               : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, dolor ut mollis rutrum, mauris arcu mollis lacus, eget imperdiet neque neque eget nisl."}
           </p>
+          <div className="pr-10 mr-5">
+            <PostStat likes={likes} postid={id} />
+          </div>
         </div>
-      </div>
-      <div className="border-b border-solid border-gray-200">
-        <PostStat radius={"rounded-b"} />
       </div>
     </>
   );

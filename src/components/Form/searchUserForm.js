@@ -16,7 +16,7 @@ export const SearchUserForm = ({ setKeywordForm }) => {
         <input
           type="text"
           placeholder="Search people"
-          maxlength={data_limit}
+          maxLength={data_limit}
           {...register("username")}
           className={`${input_search} text-gray-500`}
         />

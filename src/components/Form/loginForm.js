@@ -47,7 +47,7 @@ export const LoginForm = () => {
             <input
               type="text"
               placeholder="Email"
-              maxlength={data_limit}
+              maxLength={data_limit}
               {...register("email", { required: true })}
               className={input_normal}
             />
@@ -56,7 +56,7 @@ export const LoginForm = () => {
             <input
               type="password"
               placeholder="Password"
-              maxlength={data_limit}
+              maxLength={data_limit}
               {...register("password", { required: true })}
               className={input_normal}
             />

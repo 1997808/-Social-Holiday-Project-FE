@@ -6,12 +6,14 @@ export const ProfileFeed = ({ data, author }) => {
     <div className="w-full rounded">
       {data.map((item) => (
         <PostContent
-          key={item.createdAt}
+          key={item.id}
+          id={item.id}
           name={author.name}
           username={author.username}
           date={item.createdAt}
           content={item.content}
           profileImageId={author.cloudinaryId}
+          likes={item.likes}
         />
       ))}
     </div>

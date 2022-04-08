@@ -92,7 +92,7 @@ export const ProfileEditForm = () => {
             <input
               type="text"
               placeholder="Name"
-              maxlength={data_limit}
+              maxLength={data_limit}
               {...register("name", { required: true })}
               className={input_normal}
             />
@@ -102,7 +102,7 @@ export const ProfileEditForm = () => {
             <input
               type="text"
               placeholder="Username"
-              maxlength={data_limit}
+              maxLength={data_limit}
               {...register("username", { required: true })}
               className={input_normal}
             />
@@ -112,7 +112,7 @@ export const ProfileEditForm = () => {
             <input
               type="text"
               placeholder="Email"
-              maxlength={data_limit}
+              maxLength={data_limit}
               {...register("email", { required: true })}
               className={input_normal}
             />
@@ -121,7 +121,7 @@ export const ProfileEditForm = () => {
             <input
               type="password"
               placeholder="Password"
-              maxlength={data_limit}
+              maxLength={data_limit}
               {...register("password")}
               className={input_normal}
             />
