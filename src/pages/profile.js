@@ -11,7 +11,7 @@ export const Profile = () => {
   const [posts, setPosts] = useState([]);
   let userId = useSelector((state) => state.user.id);
   let { id } = useParams();
-  let editable = id === userId;
+  let editable = +id === userId;
 
   useEffect(() => {
     const getUserProfile = async () => {

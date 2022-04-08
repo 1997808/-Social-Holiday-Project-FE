@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assets/logo-2.svg";
+import logo from "../../assets/default-icon.png";
 import { PostStat } from "./postStat";
 import { dateFormater } from "../../utils/formatData";
 import {
@@ -11,12 +11,16 @@ export const PostContent = ({ image, name, username, date, content, profileImage
   return (
     <>
       <div className="w-full h-auto flex bg-white rounded-t p-5">
-        <Image
-          className="h-10 w-10 rounded object-cover mr-5"
-          cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
-          publicId={profileImageId}
-          crop="scale"
-        />
+        {profileImageId ?
+          <Image
+            className="h-10 w-10 rounded object-cover mr-5"
+            cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+            publicId={profileImageId}
+            crop="scale"
+          />
+          :
+          <img src={logo} className="h-10 w-10 rounded object-cover mr-5" alt="img" />
+        }
         <div className="w-full flex flex-col">
           <p className="text-sm font-bold">
             {name ? name : "Player1"}{" "}
