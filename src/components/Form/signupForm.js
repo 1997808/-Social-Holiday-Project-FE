@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
-import { input_normal } from "../../utils/css";
+import { data_limit, input_normal } from "../../utils/css";
 // import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 // import { login } from "../../app/auth";
@@ -40,6 +40,7 @@ export const SignupForm = () => {
             <input
               type="text"
               placeholder="Name"
+              maxlength={data_limit}
               {...register("name", { required: true })}
               className={input_normal}
             />
@@ -49,6 +50,7 @@ export const SignupForm = () => {
             <input
               type="text"
               placeholder="Username"
+              maxlength={data_limit}
               {...register("username", { required: true })}
               className={input_normal}
             />
@@ -58,6 +60,7 @@ export const SignupForm = () => {
             <input
               type="text"
               placeholder="Email"
+              maxlength={data_limit}
               {...register("email", { required: true })}
               className={input_normal}
             />
@@ -66,6 +69,7 @@ export const SignupForm = () => {
             <input
               type="password"
               placeholder="Password"
+              maxlength={data_limit}
               {...register("password", { required: true })}
               className={input_normal}
             />

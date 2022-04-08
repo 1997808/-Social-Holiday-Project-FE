@@ -3,3 +3,6 @@ export const input_normal =
 
 export const input_search =
   "h-12 w-full focus:outline-none rounded px-4 py-2 bg-transparent";
+
+export const data_limit = 64
+export const text_limit = 256

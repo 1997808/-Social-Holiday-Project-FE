@@ -5,6 +5,7 @@ import { ButtonSmall } from "../Button/buttonSmall";
 import { MyAxios } from "../../utils/api";
 import { useSelector } from "react-redux";
 import { Image } from "cloudinary-react";
+import { text_limit } from "../../utils/css";
 
 export const PostForm = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -43,6 +44,7 @@ export const PostForm = () => {
         <textarea
           type="text"
           placeholder="What is new?"
+          maxLength={text_limit}
           {...register("content", { required: true })}
           className="h-28 text-sm w-full focus:outline-none border-none rounded mb-5"
         />

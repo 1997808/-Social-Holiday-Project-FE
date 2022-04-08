@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from 'react-hook-form';
+import { text_limit } from "../../utils/css";
 import { ButtonSmall } from "../Button/buttonSmall";
 
 export const ChatForm = ({ image }) => {
@@ -12,6 +13,7 @@ export const ChatForm = ({ image }) => {
         <textarea
           type="text"
           placeholder="What is new?"
+          maxLength={text_limit}
           {...register("content", { required: true })}
           className="resize-none text-sm w-full focus:outline-none border-none rounded mr-5"
         />
