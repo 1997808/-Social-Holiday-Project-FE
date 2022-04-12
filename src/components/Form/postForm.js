@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import logo from "../../assets/logo-2.svg";
 import { useForm } from "react-hook-form";
 import { ButtonSmall } from "../Button/buttonSmall";
@@ -6,10 +6,25 @@ import { MyAxios } from "../../utils/api";
 import { useSelector } from "react-redux";
 import { Image } from "cloudinary-react";
 import { text_limit } from "../../utils/css";
+import { SocketContext } from "../../app/services/socket"
 
 export const PostForm = () => {
   const { register, handleSubmit, reset } = useForm();
   let user = useSelector((state) => state.user);
+  const socket = useContext(SocketContext);
+
+  useEffect(() => {
+    console.log(socket);
+    socket.on('clientEvent', (data) => {
+      console.log('emit data', data);
+      console.log(socket.id); // "G5p5..."
+    });
+
+    socket.emit('events', { name: 'Nest' }, (data) => {
+      console.log(data)
+    });
+  }, [])
+
   const onSubmit = async (data) => {
     await MyAxios.post(`posts`, { author: user.id, ...data })
       .then((res) => {
