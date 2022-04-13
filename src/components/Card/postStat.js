@@ -2,10 +2,10 @@ import React from "react";
 import { ChatAltIcon, ChevronUpIcon, ShareIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { MyAxios } from "../../utils/api";
 
-export const PostStat = ({ isLiked, likes, postid, comments, radius }) => {
+export const PostStat = ({ isLiked, votes, upvotes, downvotes, postid, comments, radius }) => {
   const statStyle = "flex text-gray-500 hover:text-logo-orange transition duration-300"
-  const handleUpvote = async () => {
-    await MyAxios.post("likeposts/handle", { postid })
+  const handleVote = async (vote) => {
+    await MyAxios.post("voteposts/handle", { postid, vote })
       .then((res) => {
         if (res.data) {
           //react success, update number and color something
@@ -18,14 +18,14 @@ export const PostStat = ({ isLiked, likes, postid, comments, radius }) => {
 
   return (
     <div className={`w-full h-auto flex justify-between bg-white rounded-b pt-5 pb-3`}>
-      <div className={statStyle} onClick={() => handleUpvote()}>
+      <div className={statStyle} onClick={() => handleVote(1)}>
         <ChevronUpIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">{likes.length}</p>
+        <p className="text-sm ml-1">{votes.length}</p>
       </div>
 
-      <div className={statStyle}>
+      <div className={statStyle} onClick={() => handleVote(-1)}>
         <ChevronDownIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">4</p>
+        <p className="text-sm ml-1">{votes.length}</p>
       </div>
 
       <div className={statStyle}>
