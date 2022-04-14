@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ChatAltIcon, ChevronUpIcon, ShareIcon, ChevronDownIcon } from "@heroicons/react/outline";
 import { MyAxios } from "../../utils/api";
 
-export const PostStat = ({ isLiked, votes, upvotes, downvotes, postid, comments, radius }) => {
+export const PostStat = ({ isLiked, votes, postid, comments, radius }) => {
   const statStyle = "flex text-gray-500 hover:text-logo-orange transition duration-300"
+  const [upvotes, setUpvotes] = useState({})
+  const [downvotes, setDownvotes] = useState({})
+
+  useEffect(() => {
+    const getPostvote = async () => {
+      await MyAxios.get(`voteposts/post/${postid}`)
+        .then((res) => {
+          if (res.data) {
+            setUpvotes(res.data.upvotes)
+            setDownvotes(res.data.downvotes)
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    getPostvote()
+  }, [])
+
   const handleVote = async (vote) => {
     await MyAxios.post("voteposts/handle", { postid, vote })
       .then((res) => {
@@ -18,19 +37,19 @@ export const PostStat = ({ isLiked, votes, upvotes, downvotes, postid, comments,
 
   return (
     <div className={`w-full h-auto flex justify-between bg-white rounded-b pt-5 pb-3`}>
+      <div className={statStyle}>
+        <ChatAltIcon className="h-4 w-4" />
+        <p className="text-sm ml-1">4</p>
+      </div>
+
       <div className={statStyle} onClick={() => handleVote(1)}>
         <ChevronUpIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">{votes.length}</p>
+        <p className="text-sm ml-1">{upvotes.count}</p>
       </div>
 
       <div className={statStyle} onClick={() => handleVote(-1)}>
         <ChevronDownIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">{votes.length}</p>
-      </div>
-
-      <div className={statStyle}>
-        <ChatAltIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">4</p>
+        <p className="text-sm ml-1">{downvotes.count}</p>
       </div>
 
       <div className={statStyle}>

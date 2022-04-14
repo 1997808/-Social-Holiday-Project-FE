@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/default-icon.png";
 import { PostStat } from "./postStat";
 import { dateFormater } from "../../utils/formatData";
 import {
   Image
 } from 'cloudinary-react';
+// import { socket } from '../../app/services/socket'
 
-export const PostContent = ({ id, image, name, username, date, content, profileImageId, upvotes, downvotes, votes }) => {
+export const PostContent = ({ id, image, name, username, date, content, profileImageId }) => {
+  // const [upvotes, setUpvotes] = useState([])
+  // const [downvotes, setDownvotes] = useState([])
+
+  // useEffect(() => {
+  //   const up = []
+  //   const down = []
+  //   votes.forEach((item) => {
+  //     if (item.vote === 1) {
+  //       up.push(item)
+  //     } else if (item.vote === -1) {
+  //       down.push(item)
+  //     }
+  //   })
+  //   setUpvotes(up)
+  //   setDownvotes(down)
+  // }, [])
+
   return (
     <>
       <div className="w-full h-auto flex bg-white rounded-t border-b border-solid border-gray-200 px-5 pt-5">
@@ -36,7 +54,7 @@ export const PostContent = ({ id, image, name, username, date, content, profileI
               : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, dolor ut mollis rutrum, mauris arcu mollis lacus, eget imperdiet neque neque eget nisl."}
           </p>
           <div className="pr-10 mr-5">
-            <PostStat votes={votes} upvotes={upvotes} downvotes={downvotes} postid={id} />
+            <PostStat postid={id} />
           </div>
         </div>
       </div>

@@ -30,6 +30,7 @@ function App() {
   const dispatch = useDispatch();
   // const isAuth = useSelector((state) => state.auth);
   // localStorage.removeItem("token");
+  console.log('reload at app')
 
   useEffect(() => {
     const checkLogin = async () => {

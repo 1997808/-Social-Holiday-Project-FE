@@ -14,9 +14,7 @@ export const NewsFeed = (data) => {
           date={item.createdAt}
           content={item.content}
           profileImageId={item.author.cloudinaryId}
-          votes={item.votes}
-          upvotes={item.upvotes}
-          downvotes={item.downvotes}
+        // votes={item.votes}
         />
       ))}
     </div>
