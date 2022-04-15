@@ -1,20 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import bg2 from "../../assets/bg-1.jpg";
 import logo from "../../assets/default-icon.png";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { ButtonInvert } from "../Button/buttonInvert";
 import { MyAxios } from "../../utils/api";
 import { Image } from "cloudinary-react";
+import { FRIENDSHIP_STATUS } from "../../app/constant"
 
 export const SearchUser = ({ userId, name, username, image, profileImageId }) => {
-  const [friend, setFriend] = useState(false);
+  const [status, setStatus] = useState(FRIENDSHIP_STATUS.NULL);
+  const [addable, setAddable] = useState(false)
+
+  useEffect(() => {
+    const checkUserFriendStatus = async () => {
+      await MyAxios.get(`friendships/check/${userId}`)
+        .then((res) => {
+          if (res.data) {
+            setStatus(res.data)
+            setAddable(canAddFriend())
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    checkUserFriendStatus()
+  }, [status, userId])
+
+  const canAddFriend = () => {
+    switch (status) {
+      case FRIENDSHIP_STATUS.NULL:
+        return true
+      case FRIENDSHIP_STATUS.PENDING:
+        return false
+      case FRIENDSHIP_STATUS.ACCEPTED:
+        return false
+      case FRIENDSHIP_STATUS.DECLINED:
+        return true
+      case FRIENDSHIP_STATUS.CANCEL:
+        return true
+      default:
+        return false
+    }
+  }
+
   const addFriend = async (id) => {
     await MyAxios.post(`friendships`, { receiver: id })
       .then((res) => {
-        if (res.data.message === "success") {
-          setFriend(true)
-        } else {
-          setFriend(true)
+        if (res.data) {
+          setStatus(res.data.status)
         }
       })
       .catch((error) => {
@@ -41,9 +75,9 @@ export const SearchUser = ({ userId, name, username, image, profileImageId }) =>
           <div className="grid grid-cols-2 gap-4 mb-5">
             <ButtonSmall
               onClick={() => addFriend(userId)}
-              text={friend ? "Pending" : "Add friend"}
+              text={addable ? "Add friend" : status}
               type="button"
-              disable={friend ? true : false}
+              disable={addable ? false : true}
             />
             <ButtonInvert text={"Follow"} type="button" />
           </div>

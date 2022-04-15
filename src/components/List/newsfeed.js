@@ -9,6 +9,7 @@ export const NewsFeed = (data) => {
         <PostContent
           key={item.id}
           id={item.id}
+          authorId={item.author.id}
           name={item.author.name}
           username={item.author.username}
           date={item.createdAt}
