@@ -1,11 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { ChatAltIcon, ChevronUpIcon, ShareIcon, ChevronDownIcon } from "@heroicons/react/outline";
+import { ChatAltIcon, ShareIcon, ThumbUpIcon, ThumbDownIcon } from "@heroicons/react/outline";
 import { MyAxios } from "../../utils/api";
 
 export const PostStat = ({ votes, postid, comments }) => {
   const statStyle = "flex text-gray-500 hover:text-logo-orange transition duration-300"
   const [upvotes, setUpvotes] = useState({})
   const [downvotes, setDownvotes] = useState({})
+  const [vote, setVote] = useState(null)
+
+  const checkUserVotepost = async () => {
+    await MyAxios.get(`voteposts/check/${postid}`)
+      .then((res) => {
+        if (res.data) {
+          setVote(res.data.data)
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     const getPostvote = async () => {
@@ -14,6 +27,7 @@ export const PostStat = ({ votes, postid, comments }) => {
           if (res.data) {
             setUpvotes(res.data.upvotes)
             setDownvotes(res.data.downvotes)
+            checkUserVotepost()
           }
         })
         .catch((error) => {
@@ -21,13 +35,14 @@ export const PostStat = ({ votes, postid, comments }) => {
         });
     }
     getPostvote()
-  }, [postid])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postid, vote])
 
   const handleVote = async (vote) => {
     await MyAxios.post("voteposts/handle", { postid, vote })
       .then((res) => {
         if (res.data) {
-          //react success, update number and color something
+          checkUserVotepost()
         }
       })
       .catch((error) => {
@@ -43,13 +58,14 @@ export const PostStat = ({ votes, postid, comments }) => {
       </div>
 
       <div className={statStyle} onClick={() => handleVote(1)}>
-        <ChevronUpIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">{upvotes.count}</p>
+        <ThumbUpIcon className={`h-4 w-4 ${vote === 1 ? 'text-logo-orange' : ''}`} />
+        <p className={`text-sm ml-1 ${vote === 1 ? 'text-logo-orange' : ''}`}>{upvotes.count}</p>
       </div>
 
       <div className={statStyle} onClick={() => handleVote(-1)}>
-        <ChevronDownIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">{downvotes.count}</p>
+        { }
+        <ThumbDownIcon className={`h-4 w-4 ${vote === -1 ? 'text-logo-blue' : ''}`} />
+        <p className={`text-sm ml-1 ${vote === -1 ? 'text-logo-blue' : ''}`}>{downvotes.count}</p>
       </div>
 
       <div className={statStyle}>

@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         'logo-orange': '#ff7555',
+        'logo-blue': '#3b72ff',
       },
       spacing: {
         '128': '32rem',
