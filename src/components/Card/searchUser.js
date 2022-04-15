@@ -25,6 +25,7 @@ export const SearchUser = ({ userId, name, username, image, profileImageId }) =>
         });
     };
     checkUserFriendStatus()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, userId])
 
   const canAddFriend = () => {

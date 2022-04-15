@@ -8,7 +8,8 @@ import bg2 from "../../assets/bg-1.jpg";
 export const UserProfile = ({ data, editable }) => {
   const { name, username, profile, cloudinaryId } = data
   return (
-    <div className="w-full h-auto bg-white rounded-b border-b border-solid border-gray-200">
+    <div className="w-full h-auto bg-white rounded-b">
+      {/* <div className="w-full h-auto bg-white rounded-b border-b border-solid border-gray-200"></div> */}
       <img className="h-48 w-full rounded-b object-cover" src={bg2} alt="" />
       <div className="px-5">
         <div className="-mt-12 mb-2 flex justify-between items-end">

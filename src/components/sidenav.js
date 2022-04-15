@@ -31,17 +31,17 @@ export const Sidenav = () => {
       <div className="flex flex-col justify-between h-full">
         <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
           <SidebarLink Icon={HomeIcon} text={"Home"} link={"/"} />
-          <SidebarLink
-            Icon={UserAddIcon}
-            text={"Friend Request"}
-            link={"/friend"}
-          />
           <SidebarLink Icon={SearchIcon} text={"Search"} link={"/search"} />
           <SidebarLink Icon={ChatAlt2Icon} text={"Message"} link={"/message"} />
           <SidebarLink
             Icon={BellIcon}
             text={"Notification"}
             link={"/notification"}
+          />
+          <SidebarLink
+            Icon={UserAddIcon}
+            text={"Friend Request"}
+            link={"/friend"}
           />
           <SidebarLink Icon={UserIcon} text={"Profile"} link={`/profile/${userId}`} />
         </div>
