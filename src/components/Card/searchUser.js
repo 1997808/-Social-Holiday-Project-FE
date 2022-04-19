@@ -73,16 +73,16 @@ export const SearchUser = ({ userId, name, username, image, profileImageId }) =>
         <div className="p-5 flex flex-col items-center">
           <p className="font-bold">{name}</p>
           <p className="text-xs text-gray-500 mb-5">@{username}</p>
-          <div className="grid grid-cols-2 gap-4 mb-5">
+          <div className="grid grid-cols-2 gap-4">
             <ButtonSmall
               onClick={() => addFriend(userId)}
               text={addable ? "Add friend" : status}
               type="button"
               disable={addable ? false : true}
             />
-            <ButtonInvert text={"Follow"} type="button" />
+            <ButtonInvert text={"Message"} type="button" />
           </div>
-          <p className="text-xs text-gray-500">View Profile</p>
+          {/* <p className="text-xs text-gray-500 mt-5">View Profile</p> */}
         </div>
       </div>
     </div>
