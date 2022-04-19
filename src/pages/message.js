@@ -29,10 +29,8 @@ export const Message = () => {
           {chat ?
             <ChatBox />
             :
-            <div
-              class={`fixed ${open ? 'block' : 'hidden'} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto overflow-x-hidden z-10 h-full w-full`}
-            >
-              <div className="relative mx-auto w-full max-w-md h-full">
+            <div className={`fixed ${open ? 'block' : 'hidden'} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto overflow-x-hidden z-10 h-full w-full flex items-center`}>
+              <div className="relative mx-auto w-full max-w-md">
                 <ModalSearch setOpen={setOpen} setChat={setChat} />
               </div>
             </div>

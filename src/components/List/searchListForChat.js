@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchUserForChat } from "../Card/searchUserForChat";
 
-export const SearchListForChat = ({ data }) => {
+export const SearchListForChat = ({ data, type }) => {
   return (
     <div className="w-full h-full">
       {data &&
@@ -12,6 +12,8 @@ export const SearchListForChat = ({ data }) => {
             name={item.name}
             username={item.username}
             profileImageId={item.cloudinaryId}
+            user={item}
+            type={type}
           />
         ))}
     </div>
