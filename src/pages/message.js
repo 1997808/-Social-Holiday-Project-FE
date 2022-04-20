@@ -10,7 +10,7 @@ export const Message = () => {
   const [conversations, setConversations] = useState([])
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get("friendships/friend")
+      await MyAxios.get("conversations")
         .then((res) => {
           if (res.data) {
             setConversations(res.data);

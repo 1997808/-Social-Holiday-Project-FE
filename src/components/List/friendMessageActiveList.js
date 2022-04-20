@@ -9,11 +9,9 @@ export const FriendMessageActiveList = ({ data, setChat, setOpen }) => {
         <p className="font-bold text-white">Messages</p>
         <PlusIcon className="h-6 text-white cursor-pointer" onClick={() => setOpen(true)} />
       </div>
-      <FriendMessageCard />
-      <FriendMessageCard />
-      <FriendMessageCard />
-      <FriendMessageCard />
-      <FriendMessageCard />
+      {data && data.map(item => (
+        <FriendMessageCard key={item.id} />
+      ))}
     </div>
   );
 };
