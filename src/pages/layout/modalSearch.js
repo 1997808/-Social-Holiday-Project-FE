@@ -26,7 +26,6 @@ export const ModalSearch = ({ setOpen, setChat }) => {
         await MyAxios.get("friendships/friend")
           .then((res) => {
             if (res.data) {
-              console.log(res.data)
               setUsers(res.data);
             }
           })
@@ -43,7 +42,7 @@ export const ModalSearch = ({ setOpen, setChat }) => {
   };
 
   const addConversation = async () => {
-    await MyAxios.post(`conversations`, { participants, type })
+    await MyAxios.post(`conversations`, { userids: participants, type })
       .then((res) => {
         if (res.data) {
           setOpen(false)
