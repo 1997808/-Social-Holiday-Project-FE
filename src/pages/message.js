@@ -8,6 +8,7 @@ export const Message = () => {
   const [open, setOpen] = useState(false)
   const [chat, setChat] = useState(null)
   const [conversations, setConversations] = useState([])
+
   useEffect(() => {
     const getFriend = async () => {
       await MyAxios.get("conversations")
@@ -22,12 +23,13 @@ export const Message = () => {
     };
     getFriend();
   }, []);
+
   return (
     <>
       <div className="flex-grow border-l border-r border-solid border-gray-200 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
         <div className="w-full">
           {chat ?
-            <ChatBox />
+            <ChatBox id={chat} />
             :
             <div className={`fixed ${open ? 'block' : 'hidden'} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto overflow-x-hidden z-10 h-full w-full flex items-center`}>
               <div className="relative mx-auto w-full max-w-md">
