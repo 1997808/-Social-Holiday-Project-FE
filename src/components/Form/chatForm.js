@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from 'react-hook-form';
+// import { MyAxios } from "../../utils/api";
 import { text_limit } from "../../utils/css";
 import { ButtonSmall } from "../Button/buttonSmall";
+import { SocketContext } from "../../app/services/socket"
 
-export const ChatForm = ({ image }) => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
+
+export const ChatForm = () => {
+  const { register, handleSubmit, reset } = useForm();
+  const socket = useContext(SocketContext);
+
+  const onSubmit = async (data) => {
+    socket.emit('handleMessage', { data }, (res) => {
+      if (res) {
+        console.log(res)
+      }
+      reset({ content: "" });
+    });
+  };
 
   return (
     <div className="w-full h-full flex items-center bg-white rounded p-5">
