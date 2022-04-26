@@ -15,7 +15,7 @@ export const SignupForm = () => {
   const onSubmit = async (data) => {
     await MyAxios.post(`auth/signup`, data)
       .then((res) => {
-        if (res.data.message === "success") {
+        if (res.data.message === "SUCCESS") {
           setTimeout(() => {
             navigate("/auth/login", { replace: true });
           }, 1000)

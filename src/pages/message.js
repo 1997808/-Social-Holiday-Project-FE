@@ -29,14 +29,15 @@ export const Message = () => {
       <div className="flex-grow border-l border-r border-solid border-gray-200 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
         <div className="w-full">
           {chat ?
-            <ChatBox id={chat} />
+            <ChatBox conversationId={chat} />
             :
-            <div className={`fixed ${open ? 'block' : 'hidden'} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto overflow-x-hidden z-10 h-full w-full flex items-center`}>
-              <div className="relative mx-auto w-full max-w-md">
-                <ModalSearch setOpen={setOpen} setChat={setChat} />
-              </div>
-            </div>
+            <></>
           }
+          <div className={`fixed ${open ? 'block' : 'hidden'} inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto overflow-x-hidden z-10 h-full w-full flex items-center`}>
+            <div className="relative mx-auto w-full max-w-md">
+              <ModalSearch setOpen={setOpen} setChat={setChat} />
+            </div>
+          </div>
         </div>
       </div>
       <div className="hidden lg:inline lg:ml-[745px] xl:ml-[1050px] w-full lg:max-w-[270px] xl:max-w-[320px] px-2 fixed h-screen">

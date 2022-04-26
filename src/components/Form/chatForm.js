@@ -4,14 +4,16 @@ import { useForm } from 'react-hook-form';
 import { text_limit } from "../../utils/css";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { SocketContext } from "../../app/services/socket"
+import { useSelector } from "react-redux";
 
 
-export const ChatForm = () => {
+export const ChatForm = ({ conversationId }) => {
   const { register, handleSubmit, reset } = useForm();
+  const userId = useSelector(state => state.user.id)
   const socket = useContext(SocketContext);
 
   const onSubmit = async (data) => {
-    socket.emit('handleMessage', { data }, (res) => {
+    socket.emit('handleMessage', { ...data, conversationId, userId }, (res) => {
       if (res) {
         console.log(res)
       }
