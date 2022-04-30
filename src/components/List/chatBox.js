@@ -7,6 +7,8 @@ import { ChatForm } from "../Form/chatForm";
 export const ChatBox = ({ conversationId }) => {
   const [conversation, setConversation] = useState({})
   const [count, setCount] = useState(0)
+  const [page, setPage] = useState(2)
+  const [skip, setSkip] = useState(15)
   const [chats, setChats] = useState([])
   // const [loadMore, setLoadMore] = useState(true);
   const listChatRef = useRef();
@@ -19,6 +21,8 @@ export const ChatBox = ({ conversationId }) => {
   useEffect(() => {
     socket.on('newMessage', (data) => {
       setChats((chats) => [data, ...chats])
+      setCount((count) => count + 1)
+      setSkip((skip) => skip + 1)
     })
   }, [])
 
@@ -53,12 +57,22 @@ export const ChatBox = ({ conversationId }) => {
     getMessage();
   }, [conversationId]);
 
-  const onScroll = () => {
+  const onScroll = async () => {
     if (listChatRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listChatRef.current;
-      // console.log(clientHeight - scrollTop, scrollHeight)
-      if (clientHeight - scrollTop + 1 === scrollHeight) {
-        console.log("reached top");
+      // console.log("reached top");
+      if (clientHeight - scrollTop + 2 >= scrollHeight && chats.length < count) {
+        await MyAxios.post(`messages/conversation`, { conversationId, page: page, skipSocket: skip })
+          .then((res) => {
+            if (res.data) {
+              setChats((chats) => [...chats, ...res.data.data])
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setPage(page + 1)
+        setSkip(skip + 15)
       }
     }
   };
