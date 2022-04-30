@@ -2,9 +2,9 @@ import { Image } from "cloudinary-react";
 import React from "react";
 import profile from "../../assets/profile.jpg"
 
-export const FriendMessageCard = ({ id, profileImageId, title, setChat }) => {
+export const FriendMessageCard = ({ id, profileImageId, title, chat, setChat }) => {
   return (
-    <div className="flex items-center bg-white rounded p-5" onClick={() => setChat(id)}>
+    <div className={`flex items-center bg-white rounded p-5 transition duration-300 ${chat === id ? 'disable bg-gray-200' : 'block hover:bg-gray-100'}`} onClick={() => setChat(id)}>
       {profileImageId ?
         <Image
           className="h-14 w-14 rounded object-cover"

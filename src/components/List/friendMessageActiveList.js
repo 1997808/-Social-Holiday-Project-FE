@@ -3,7 +3,7 @@ import { FriendMessageCard } from "../Card/friendMessageCard";
 import { PlusIcon } from "@heroicons/react/outline"
 import { useSelector } from "react-redux";
 
-export const FriendMessageActiveList = ({ data, setChat, setOpen }) => {
+export const FriendMessageActiveList = ({ data, chat, setChat, setOpen }) => {
   const userId = useSelector(state => state.user.id)
   return (
     <div className="relative w-full bg-white rounded overflow-y-scroll h-screen">
@@ -16,7 +16,7 @@ export const FriendMessageActiveList = ({ data, setChat, setOpen }) => {
           //direct message
           const users = item.participants.filter(item => item.userId !== userId)
           const user = users[0].user
-          return <FriendMessageCard key={item.id} id={item.id} profileImageId={user.cloudinaryId} title={user.name} setChat={setChat} />
+          return <FriendMessageCard key={item.id} id={item.id} profileImageId={user.cloudinaryId} title={user.name} setChat={setChat} chat={chat} />
         } else {
           return <FriendMessageCard />
         }
