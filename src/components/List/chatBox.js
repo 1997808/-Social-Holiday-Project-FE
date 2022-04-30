@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { socket } from "../../app/services/socket";
 import { MyAxios } from "../../utils/api";
 import { ChatCard } from "../Card/chatCard";
 import { ChatForm } from "../Form/chatForm";
@@ -14,6 +15,12 @@ export const ChatBox = ({ conversationId }) => {
   //   getMessage(loadMore);
   //   setLoadMore(false);
   // }, [loadMore]);
+
+  useEffect(() => {
+    socket.on('newMessage', (data) => {
+      setChats((chats) => [data, ...chats])
+    })
+  }, [])
 
   useEffect(() => {
     const getFriend = async () => {
@@ -35,7 +42,6 @@ export const ChatBox = ({ conversationId }) => {
       await MyAxios.post(`messages/conversation`, { conversationId })
         .then((res) => {
           if (res.data) {
-            console.log(res.data)
             setChats(res.data.data)
             setCount(res.data.count)
           }

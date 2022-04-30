@@ -14,10 +14,9 @@ export const ChatForm = ({ conversationId }) => {
 
   const onSubmit = async (data) => {
     socket.emit('handleMessage', { ...data, conversationId, userId }, (res) => {
-      if (res) {
-        console.log(res)
+      if (res.message === 'SUCCESS') {
+        reset({ content: "" });
       }
-      reset({ content: "" });
     });
   };
 
