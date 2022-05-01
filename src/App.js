@@ -30,6 +30,7 @@ function App() {
   const dispatch = useDispatch();
   // const isAuth = useSelector((state) => state.auth);
   // localStorage.removeItem("token");
+  console.log('reload at app')
 
   useEffect(() => {
     const checkLogin = async () => {
@@ -69,7 +70,7 @@ function App() {
             <Route path="friend" element={<FriendRequest />} />
             <Route path="message" element={<Message />} />
             <Route path="notification" element={<Notification />} />
-            <Route path="profile" element={<Profile />} />
+            <Route path="profile/:id" element={<Profile />} />
             <Route path="edit" element={<ProfileEdit />} />
             <Route path="*" element={<Page404 />} />
           </Route>

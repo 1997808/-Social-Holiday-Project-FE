@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { input_search } from '../../utils/css';
+import { data_limit, input_search } from '../../utils/css';
 import { SearchIcon } from '@heroicons/react/solid'
 
 export const SearchUserForm = ({ setKeywordForm }) => {
@@ -16,6 +16,7 @@ export const SearchUserForm = ({ setKeywordForm }) => {
         <input
           type="text"
           placeholder="Search people"
+          maxLength={data_limit}
           {...register("username")}
           className={`${input_search} text-gray-500`}
         />

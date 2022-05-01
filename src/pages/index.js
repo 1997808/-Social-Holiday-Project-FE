@@ -7,6 +7,7 @@ import { MyAxios } from "../utils/api";
 export const Home = () => {
   const [posts, setPosts] = useState([]);
   const [friends, setFriends] = useState([]);
+
   useEffect(() => {
     const getPosts = async () => {
       await MyAxios.get("posts/all")

@@ -10,12 +10,13 @@ import {
   LogoutIcon,
 } from "@heroicons/react/outline";
 import logo from "../assets/logo-2.svg";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../app/auth";
 import { SidebarLink } from "./Button/sidebarLink";
 
 export const Sidenav = () => {
   const dispatch = useDispatch();
+  let userId = useSelector((state) => state.user.id);
   const logOutButton = () => {
     localStorage.clear();
     dispatch(logOut());
@@ -30,11 +31,6 @@ export const Sidenav = () => {
       <div className="flex flex-col justify-between h-full">
         <div className="space-y-2.5 mt-4 mb-2.5 xl:ml-24">
           <SidebarLink Icon={HomeIcon} text={"Home"} link={"/"} />
-          <SidebarLink
-            Icon={UserAddIcon}
-            text={"Friend Request"}
-            link={"/friend"}
-          />
           <SidebarLink Icon={SearchIcon} text={"Search"} link={"/search"} />
           <SidebarLink Icon={ChatAlt2Icon} text={"Message"} link={"/message"} />
           <SidebarLink
@@ -42,7 +38,12 @@ export const Sidenav = () => {
             text={"Notification"}
             link={"/notification"}
           />
-          <SidebarLink Icon={UserIcon} text={"Profile"} link={"/profile"} />
+          <SidebarLink
+            Icon={UserAddIcon}
+            text={"Friend Request"}
+            link={"/friend"}
+          />
+          <SidebarLink Icon={UserIcon} text={"Profile"} link={`/profile/${userId}`} />
         </div>
         <div
           className="space-y-2.5 mt-4 mb-2.5 xl:ml-24"

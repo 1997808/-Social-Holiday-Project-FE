@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "../Button/button";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { input_normal } from "../../utils/css";
+import { data_limit, input_normal } from "../../utils/css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../app/auth";
@@ -47,6 +47,7 @@ export const LoginForm = () => {
             <input
               type="text"
               placeholder="Email"
+              maxLength={data_limit}
               {...register("email", { required: true })}
               className={input_normal}
             />
@@ -55,6 +56,7 @@ export const LoginForm = () => {
             <input
               type="password"
               placeholder="Password"
+              maxLength={data_limit}
               {...register("password", { required: true })}
               className={input_normal}
             />

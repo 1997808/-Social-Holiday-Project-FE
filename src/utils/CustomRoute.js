@@ -4,10 +4,11 @@ import { useLocation, Navigate } from "react-router-dom";
 
 export const ProtectedRoute = ({ children }) => {
   const auth = useSelector((state) => state.auth);
-  let location = useLocation();
+  // let location = useLocation();
 
   if (!auth.user) {
-    return <Navigate to="/auth/login" state={{ from: location }} />;
+    return <Navigate to="/auth/login" />;
+    // return <Navigate to="/auth/login" state={{ from: location }} />;
   }
 
   return children;
@@ -15,10 +16,11 @@ export const ProtectedRoute = ({ children }) => {
 
 export const AuthRoute = ({ children }) => {
   const auth = useSelector((state) => state.auth);
-  let location = useLocation();
+  // let location = useLocation();
 
   if (auth.user) {
-    return <Navigate to="/" state={{ from: location }} />;
+    return <Navigate to="/" />;
+    // return <Navigate to="/" state={{ from: location }} />;
   }
 
   return children;

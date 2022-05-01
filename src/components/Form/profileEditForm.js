@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
-import { input_normal } from "../../utils/css";
+import { data_limit, input_normal, text_limit } from "../../utils/css";
 // import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 // import { login } from "../../app/auth";
@@ -92,6 +92,7 @@ export const ProfileEditForm = () => {
             <input
               type="text"
               placeholder="Name"
+              maxLength={data_limit}
               {...register("name", { required: true })}
               className={input_normal}
             />
@@ -101,6 +102,7 @@ export const ProfileEditForm = () => {
             <input
               type="text"
               placeholder="Username"
+              maxLength={data_limit}
               {...register("username", { required: true })}
               className={input_normal}
             />
@@ -110,6 +112,7 @@ export const ProfileEditForm = () => {
             <input
               type="text"
               placeholder="Email"
+              maxLength={data_limit}
               {...register("email", { required: true })}
               className={input_normal}
             />
@@ -118,6 +121,7 @@ export const ProfileEditForm = () => {
             <input
               type="password"
               placeholder="Password"
+              maxLength={data_limit}
               {...register("password")}
               className={input_normal}
             />
@@ -127,6 +131,7 @@ export const ProfileEditForm = () => {
             <textarea
               type="text"
               placeholder="Profile"
+              maxLength={text_limit}
               {...register("profile", { required: true })}
               className="text-sm w-full focus:outline-none border border-gray-200 rounded px-4 py-2 mr-5"
             />

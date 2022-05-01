@@ -31,7 +31,7 @@ export const FriendRequestCard = ({ id, userId, profileImageId, name, username, 
       });
   };
   return (
-    <div className="w-full h-auto flex justify-center bg-white rounded p-5" onClick={() => checkUserProfile(userId)}>
+    <div className={`w-full h-auto flex justify-center bg-white rounded p-5 ${review ? "opacity-75 bg-gray-200" : ""}`} onClick={() => checkUserProfile(userId)}>
       {profileImageId ?
         <Image
           className="h-14 w-14 rounded object-cover"
