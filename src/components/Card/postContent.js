@@ -36,11 +36,13 @@ export const PostContent = ({ id, authorId, image, name, username, date, content
           <p className="text-xs font-light pt-1">
             {date ? dateFormater(date) : "January 28 at 1:47 PM"}
           </p>
-          <p className="text-sm pt-2">
-            {content
-              ? content
-              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, dolor ut mollis rutrum, mauris arcu mollis lacus, eget imperdiet neque neque eget nisl."}
-          </p>
+          <Link to={`/post/${id}`} target="_blank">
+            <p className="text-sm pt-2">
+              {content
+                ? content
+                : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent laoreet, dolor ut mollis rutrum, mauris arcu mollis lacus, eget imperdiet neque neque eget nisl."}
+            </p>
+          </Link>
           <div className="pr-10 mr-5">
             <PostStat postid={id} />
           </div>
