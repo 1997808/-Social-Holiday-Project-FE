@@ -3,20 +3,21 @@ import { useParams } from "react-router-dom";
 import { PostContent } from "../components/Card/postContent";
 import { CommentForm } from "../components/Form/commentForm";
 import { FriendActiveList } from "../components/List/friendActiveList";
+import { PostCommentList } from "../components/List/postCommentList";
 import { MyAxios } from "../utils/api";
 
 export const PostDetail = () => {
   const [post, setPost] = useState(null);
   const [friends, setFriends] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [count, setCount] = useState(0);
   let { id } = useParams();
 
   useEffect(() => {
-    console.log('data')
     const getPost = async () => {
       await MyAxios.get(`posts/${id}`)
         .then((res) => {
           if (res.data) {
-            console.log(res.data)
             setPost(res.data);
           }
         })
@@ -42,6 +43,22 @@ export const PostDetail = () => {
     getFriend();
   }, []);
 
+  useEffect(() => {
+    const getComments = async () => {
+      await MyAxios.post(`comments/post`, { postId: id })
+        .then((res) => {
+          if (res.data) {
+            setComments(res.data.data)
+            setCount(res.data.count)
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getComments();
+  }, [id]);
+
   return (
     <>
       <div className="flex-grow border-l border-r border-solid border-gray-200 max-w-2xl sm:ml-[73px] xl:ml-[370px]">
@@ -59,6 +76,7 @@ export const PostDetail = () => {
                 content={post.content}
                 profileImageId={post.author.cloudinaryId}
               />
+              {comments ? <PostCommentList data={comments} /> : <></>}
             </>
             : <></>
           }

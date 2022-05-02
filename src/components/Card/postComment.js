@@ -41,6 +41,7 @@ export const PostComment = ({ id, authorId, image, name, username, date, content
               : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
           </p>
         </div>
+
       </div>
     </>
   );
