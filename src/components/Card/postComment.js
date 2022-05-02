@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/default-icon.png";
-import { PostStat } from "./postStat";
 import { dateFormater } from "../../utils/formatData";
 import {
   Image
 } from 'cloudinary-react';
 
-export const PostContent = ({ id, authorId, image, name, username, date, content, profileImageId }) => {
+export const PostComment = ({ id, authorId, image, name, username, date, content, profileImageId }) => {
   return (
     <>
       <div className="w-full h-auto flex bg-white rounded-t border-b border-solid border-gray-200 px-5 pt-5">
@@ -36,16 +35,11 @@ export const PostContent = ({ id, authorId, image, name, username, date, content
           <p className="text-xs font-light pt-1">
             {date ? dateFormater(date) : "January 28 at 1:47 PM"}
           </p>
-          <Link to={`/post/${id}`} target="_blank">
-            <p className="text-sm pt-2">
-              {content
-                ? content
-                : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
-            </p>
-          </Link>
-          <div className="pr-10 mr-5">
-            <PostStat postid={id} />
-          </div>
+          <p className="text-sm pt-2">
+            {content
+              ? content
+              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+          </p>
         </div>
       </div>
     </>
