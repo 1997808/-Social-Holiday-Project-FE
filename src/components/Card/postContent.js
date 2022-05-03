@@ -7,7 +7,7 @@ import {
   Image
 } from 'cloudinary-react';
 
-export const PostContent = ({ id, authorId, image, name, username, date, content, profileImageId }) => {
+export const PostContent = ({ id, authorId, image, name, username, date, content, profileImageId, comments }) => {
   return (
     <>
       <div className="w-full h-auto flex bg-white rounded-t border-b border-solid border-gray-200 px-5 pt-5">
@@ -44,7 +44,7 @@ export const PostContent = ({ id, authorId, image, name, username, date, content
             </p>
           </Link>
           <div className="pr-10 mr-5">
-            <PostStat postid={id} />
+            <PostStat postid={id} comments={comments} />
           </div>
         </div>
       </div>

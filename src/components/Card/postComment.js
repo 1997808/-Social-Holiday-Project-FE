@@ -5,6 +5,7 @@ import { dateFormater } from "../../utils/formatData";
 import {
   Image
 } from 'cloudinary-react';
+import { PostCommentStat } from "./postCommentStat";
 
 export const PostComment = ({ id, authorId, image, name, username, date, content, profileImageId }) => {
   return (
@@ -40,8 +41,10 @@ export const PostComment = ({ id, authorId, image, name, username, date, content
               ? content
               : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
           </p>
+          <div className="pr-10 mr-5">
+            <PostCommentStat commentId={id} />
+          </div>
         </div>
-
       </div>
     </>
   );

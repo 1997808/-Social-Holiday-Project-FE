@@ -75,6 +75,7 @@ export const PostDetail = () => {
                 date={post.createdAt}
                 content={post.content}
                 profileImageId={post.author.cloudinaryId}
+                comments={post.comments}
               />
               {comments ? <PostCommentList data={comments} /> : <></>}
             </>

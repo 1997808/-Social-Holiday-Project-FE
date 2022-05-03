@@ -13,6 +13,7 @@ export const ProfileFeed = ({ data, author }) => {
           date={item.createdAt}
           content={item.content}
           profileImageId={author.cloudinaryId}
+          comments={item.comments}
         // votes={item.votes}
         />
       ))}

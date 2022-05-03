@@ -54,7 +54,7 @@ export const PostStat = ({ votes, postid, comments }) => {
     <div className={`w-full h-auto flex justify-between bg-white rounded-b pt-5 pb-3`}>
       <div className={statStyle}>
         <ChatAltIcon className="h-4 w-4" />
-        <p className="text-sm ml-1">4</p>
+        <p className="text-sm ml-1">{comments.length}</p>
       </div>
 
       <div className={statStyle} onClick={() => handleVote(1)}>

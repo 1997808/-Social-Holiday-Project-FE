@@ -15,6 +15,7 @@ export const NewsFeed = (data) => {
           date={item.createdAt}
           content={item.content}
           profileImageId={item.author.cloudinaryId}
+          comments={item.comments}
         // votes={item.votes}
         />
       ))}
