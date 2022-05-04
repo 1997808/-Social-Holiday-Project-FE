@@ -10,13 +10,7 @@ export const ChatBox = ({ conversationId }) => {
   const [page, setPage] = useState(2)
   const [skip, setSkip] = useState(15)
   const [chats, setChats] = useState([])
-  // const [loadMore, setLoadMore] = useState(true);
   const listChatRef = useRef();
-
-  // useEffect(() => {
-  //   getMessage(loadMore);
-  //   setLoadMore(false);
-  // }, [loadMore]);
 
   useEffect(() => {
     socket.on('newMessage', (data) => {
@@ -60,8 +54,8 @@ export const ChatBox = ({ conversationId }) => {
   const onScroll = async () => {
     if (listChatRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listChatRef.current;
-      // console.log("reached top");
       if (clientHeight - scrollTop + 2 >= scrollHeight && chats.length < count) {
+        // reached top of scroll
         await MyAxios.post(`messages/conversation`, { conversationId, page: page, skipSocket: skip })
           .then((res) => {
             if (res.data) {
@@ -78,13 +72,13 @@ export const ChatBox = ({ conversationId }) => {
   };
 
   return (
-    <div className="w-full bg-white rounded h-screen">
-      <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t">
+    <div className="w-full bg-white flex flex-col rounded h-screen">
+      <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t" style={{ maxHeight: "10vh" }}>
         <p className="font-bold text-white">{conversation.title}</p>
       </div>
       <div
         className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200"
-        style={{ height: "80vh" }}
+        style={{ minHeight: "80vh" }}
         onScroll={onScroll}
         ref={listChatRef}
       >

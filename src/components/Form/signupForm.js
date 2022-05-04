@@ -2,15 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
 import { data_limit, input_normal } from "../../utils/css";
-// import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-// import { login } from "../../app/auth";
 import { MyAxios } from "../../utils/api";
 
 export const SignupForm = () => {
   const { register, handleSubmit, formState: { errors }, setError } = useForm();
-  // const dispatch = useDispatch();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     await MyAxios.post(`auth/signup`, data)
@@ -18,7 +15,7 @@ export const SignupForm = () => {
         if (res.data.message === "SUCCESS") {
           setTimeout(() => {
             navigate("/auth/login", { replace: true });
-          }, 1000)
+          }, 500)
           setError("email", { type: "success", message: res.data.message });
         } else {
           setError("email", { type: "failed", message: res.data.message });

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChatAltIcon, ShareIcon, ThumbUpIcon, ThumbDownIcon } from "@heroicons/react/outline";
 import { MyAxios } from "../../utils/api";
 
-export const PostStat = ({ votes, postid, comments }) => {
+export const PostStat = ({ postid, comments }) => {
   const statStyle = "flex text-gray-500 hover:text-logo-orange transition duration-300"
   const [upvotes, setUpvotes] = useState({})
   const [downvotes, setDownvotes] = useState({})

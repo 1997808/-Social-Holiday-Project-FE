@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useForm } from 'react-hook-form';
-// import { MyAxios } from "../../utils/api";
 import { text_limit } from "../../utils/css";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { SocketContext } from "../../app/services/socket"
