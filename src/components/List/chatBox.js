@@ -77,7 +77,7 @@ export const ChatBox = ({ conversationId }) => {
         <p className="font-bold text-white">{conversation.title}</p>
       </div>
       <div
-        className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200"
+        className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200 grow"
         style={{ minHeight: "80vh" }}
         onScroll={onScroll}
         ref={listChatRef}

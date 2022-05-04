@@ -21,7 +21,7 @@ export const PostCommentStat = ({ commentId, comments }) => {
   };
 
   useEffect(() => {
-    const getPostvote = async () => {
+    const getCommentvote = async () => {
       await MyAxios.get(`votecomments/comment/${commentId}`)
         .then((res) => {
           if (res.data) {
@@ -34,11 +34,11 @@ export const PostCommentStat = ({ commentId, comments }) => {
           console.log(error);
         });
     }
-    getPostvote()
+    getCommentvote()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentId, vote])
 
-  const handleVote = async (vote) => {
+  const handleCommentvote = async (vote) => {
     await MyAxios.post("votecomments/handle", { commentId, vote })
       .then((res) => {
         if (res.data) {
@@ -52,12 +52,12 @@ export const PostCommentStat = ({ commentId, comments }) => {
 
   return (
     <div className={`w-full h-auto flex justify-between bg-white rounded-b pt-5 pb-3`}>
-      <div className={statStyle} onClick={() => handleVote(1)}>
+      <div className={statStyle} onClick={() => handleCommentvote(1)}>
         <ThumbUpIcon className={`h-4 w-4 ${vote === 1 ? 'text-logo-orange' : ''}`} />
         <p className={`text-sm ml-1 ${vote === 1 ? 'text-logo-orange' : ''}`}>{upvotes.count}</p>
       </div>
 
-      <div className={statStyle} onClick={() => handleVote(-1)}>
+      <div className={statStyle} onClick={() => handleCommentvote(-1)}>
         { }
         <ThumbDownIcon className={`h-4 w-4 ${vote === -1 ? 'text-logo-blue' : ''}`} />
         <p className={`text-sm ml-1 ${vote === -1 ? 'text-logo-blue' : ''}`}>{downvotes.count}</p>
