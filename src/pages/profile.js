@@ -21,7 +21,21 @@ export const Profile = () => {
         .then((res) => {
           if (res.data) {
             setUser(res.data);
-            setPosts(res.data.posts);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getUserProfile();
+  }, [id]);
+
+  useEffect(() => {
+    const getUserProfile = async () => {
+      await MyAxios.get(`posts/profile/${id}`)
+        .then((res) => {
+          if (res.data) {
+            setPosts(res.data.data);
           }
         })
         .catch((error) => {
