@@ -31,7 +31,7 @@ export const Profile = () => {
   }, [id]);
 
   useEffect(() => {
-    const getUserProfile = async () => {
+    const getUserPost = async () => {
       await MyAxios.get(`posts/profile/${id}`)
         .then((res) => {
           if (res.data) {
@@ -42,7 +42,7 @@ export const Profile = () => {
           console.log(error);
         });
     };
-    getUserProfile();
+    getUserPost();
   }, [id]);
 
   return (
