@@ -13,7 +13,7 @@ export const ProfileFeed = ({ data, author }) => {
           date={item.createdAt}
           content={item.content}
           profileImageId={author.cloudinaryId}
-        // votes={item.votes}
+          comments={item.comments}
         />
       ))}
     </div>

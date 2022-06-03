@@ -30,7 +30,18 @@ export const FriendRequest = () => {
       .then((res) => {
         if (res.data) {
           setUser(res.data);
-          setPosts(res.data.posts);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const getUserPost = async (id) => {
+    await MyAxios.get(`posts/profile/${id}`)
+      .then((res) => {
+        if (res.data) {
+          setPosts(res.data.data);
         }
       })
       .catch((error) => {
@@ -42,6 +53,7 @@ export const FriendRequest = () => {
     if (userId !== id) {
       //less reload
       getUserProfile(id);
+      getUserPost(id)
       setUserId(id);
     }
   }

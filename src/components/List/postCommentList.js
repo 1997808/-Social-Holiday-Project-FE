@@ -1,12 +1,12 @@
 import React from "react";
-import { PostContent } from "../Card/postContent";
+import { PostComment } from "../Card/postComment";
 
-export const NewsFeed = (data) => {
+export const PostCommentList = (data) => {
   //data have data and count
   return (
     <div className="w-full rounded">
       {data.data.map((item) => (
-        <PostContent
+        <PostComment
           key={item.id}
           id={item.id}
           authorId={item.author.id}
@@ -15,7 +15,6 @@ export const NewsFeed = (data) => {
           date={item.createdAt}
           content={item.content}
           profileImageId={item.author.cloudinaryId}
-          comments={item.comments}
         />
       ))}
     </div>

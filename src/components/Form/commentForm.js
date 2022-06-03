@@ -7,13 +7,14 @@ import { useSelector } from "react-redux";
 import { Image } from "cloudinary-react";
 import { text_limit } from "../../utils/css";
 
-export const PostForm = () => {
+export const CommentForm = ({ postid }) => {
   const { register, handleSubmit, reset } = useForm();
   let user = useSelector((state) => state.user);
 
   const onSubmit = async (data) => {
-    await MyAxios.post(`posts`, { author: user.id, ...data })
+    await MyAxios.post(`comments`, { post: postid, ...data })
       .then((res) => {
+        console.log(res)
         if (res.statusText === "Created") {
           reset({ content: "" });
         } else {
@@ -44,14 +45,14 @@ export const PostForm = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col">
         <textarea
           type="text"
-          placeholder="What is new?"
+          placeholder="Add a comment"
           maxLength={text_limit}
           {...register("content", { required: true })}
           className="h-28 text-sm w-full focus:outline-none border-none rounded mb-5"
         />
 
         <div className="flex justify-end">
-          <ButtonSmall text={"Upload"} type="submit" />
+          <ButtonSmall text={"Send"} type="submit" />
         </div>
       </form>
     </div>

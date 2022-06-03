@@ -21,6 +21,7 @@ export const LoginForm = () => {
           dispatch(login());
           dispatch(setUser(res.data.user));
           localStorage.setItem("token", res.data.accessToken);
+          // attach token to every axios call
           MyAxios.interceptors.request.use(function (config) {
             const token = localStorage.getItem("token");
             config.headers.Authorization = token ? `Bearer ${token}` : "";
@@ -72,7 +73,7 @@ export const LoginForm = () => {
 
           <div className="mt-8">
             <p className="text-xs">
-              Don’t have an account?{" "}
+              Don't have an account?{" "}
               <span className="text-logo-orange">
                 <Link to="/auth/signup">Register now</Link>
               </span>

@@ -9,9 +9,3 @@ export const MyAxios = Axios.create({
     Authorization: `Bearer ${accessToken}`,
   },
 });
-
-// export const MyToken = {
-//   headers: {
-//     "x-access-token": localStorage.getItem("token"),
-//   },
-// };

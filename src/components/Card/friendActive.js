@@ -1,6 +1,5 @@
 import { Image } from "cloudinary-react";
 import React from "react";
-import logo from "../../assets/logo-2.svg";
 
 export const FriendActive = ({ profileImageId, name }) => {
   return (
@@ -11,7 +10,6 @@ export const FriendActive = ({ profileImageId, name }) => {
         publicId={profileImageId}
         crop="scale"
       />
-      {/* <img className="h-10 w-10 rounded object-cover" src={logo} alt="logo" /> */}
       <p className="ml-3 text-sm truncate">{name}</p>
     </div>
   );
