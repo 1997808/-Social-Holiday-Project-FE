@@ -39,9 +39,9 @@ function App() {
             localStorage.removeItem("token");
             dispatch(resetUser());
             dispatch(logOut());
-            return (
-              <Navigate to="/auth/login" replace={true} />
-            )
+            // return (
+            //   <Navigate to="/auth/login" replace={true} />
+            // )
           }
         })
         .catch((error) => {
