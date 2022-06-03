@@ -5,7 +5,6 @@ import { ButtonInvert } from "../Button/buttonInvert";
 import { MyAxios } from "../../utils/api";
 import { Image } from "cloudinary-react";
 import { FRIENDSHIP_STATUS } from "../../app/constant"
-import { canAddFriendByStatus } from "../../utils/helper";
 
 export const FriendProfile = ({ userId, name, username, image, profileImageId }) => {
   const [status, setStatus] = useState(FRIENDSHIP_STATUS.NULL);

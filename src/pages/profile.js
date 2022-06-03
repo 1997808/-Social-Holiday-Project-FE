@@ -69,7 +69,11 @@ export const Profile = () => {
           <ProfileContent content={content} setContent={setContent} />
           {content === "Posts" ?
             <ProfileFeed data={posts} author={user} /> :
-            <FriendListProfile data={friends} />
+            content === "Friends" ?
+              <FriendListProfile data={friends} /> :
+              content === "Media" ?
+                <></> :
+                <></>
           }
         </div>
       </div>
