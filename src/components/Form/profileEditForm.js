@@ -22,48 +22,45 @@ export const ProfileEditForm = () => {
   const handleSubmission = async () => {
     const form = new FormData();
     form.append("file", selectedFile);
-    await MyAxios.post(`users/profile/icon`, form)
-      .then((res) => {
-        if (res.data) {
-          setIsFilePicked(false);
-          // setSelectedFile(null);
-          setTimeout(() => {
-            navigate("/profile", { replace: true });
-          }, 1000)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`users/profile/icon`, form)
+      if (res.data) {
+        setIsFilePicked(false);
+        // setSelectedFile(null);
+        setTimeout(() => {
+          navigate("/profile", { replace: true });
+        }, 1000)
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     const getUser = async () => {
-      await MyAxios.get(`users`)
-        .then((res) => {
-          if (res.data) {
-            reset({ ...res.data })
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`users`)
+        if (res.data) {
+          reset({ ...res.data })
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getUser();
   }, [reset]);
 
   const onSubmit = async (data) => {
-    await MyAxios.post(`users/profile`, data)
-      .then((res) => {
-        if (res.data) {
-          setError("email", { type: "success", message: res.data.message });
-        } else {
-          setError("email", { type: "failed", message: res.data.message });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`users/profile`, data)
+      if (res.data) {
+        setError("email", { type: "success", message: res.data.message });
+      } else {
+        setError("email", { type: "failed", message: res.data.message });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

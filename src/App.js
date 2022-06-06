@@ -30,23 +30,23 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      await MyAxios.get("auth/checkLogin")
-        .then((res) => {
-          if (res.data) {
-            dispatch(setUser(res.data.user));
-            dispatch(login());
-          } else {
-            localStorage.removeItem("token");
-            dispatch(resetUser());
-            dispatch(logOut());
-            // return (
-            //   <Navigate to="/auth/login" replace={true} />
-            // )
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("auth/checkLogin")
+        if (res.data) {
+          dispatch(setUser(res.data.user));
+          dispatch(login());
+        } else {
+          localStorage.removeItem("token");
+          dispatch(resetUser());
+          dispatch(logOut());
+          // return (
+          //   <Navigate to="/auth/login" replace={true} />
+          // )
+        }
+      }
+      catch (error) {
+        console.log(error);
+      };
     };
     checkLogin();
   }, [dispatch]);

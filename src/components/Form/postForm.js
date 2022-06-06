@@ -12,17 +12,16 @@ export const PostForm = () => {
   let user = useSelector((state) => state.user);
 
   const onSubmit = async (data) => {
-    await MyAxios.post(`posts`, { author: user.id, ...data })
-      .then((res) => {
-        if (res.statusText === "Created") {
-          reset({ content: "" });
-        } else {
-          console.log("fail");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`posts`, { author: user.id, ...data })
+      if (res.statusText === "Created") {
+        reset({ content: "" });
+      } else {
+        console.log("fail");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

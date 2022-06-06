@@ -14,31 +14,31 @@ export const FriendProfile = ({ userId, name, username, image, profileImageId })
 
   useEffect(() => {
     const findUserFriendRequest = async () => {
-      await MyAxios.get(`friendships/find/${userId}`)
-        .then((res) => {
-          if (res.data) {
-            setId(res.data.id)
-            setStatus(res.data.status)
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`friendships/find/${userId}`)
+        if (res.data) {
+          setId(res.data.id)
+          setStatus(res.data.status)
+        }
+      }
+      catch (error) {
+        console.log(error);
+      }
     };
     findUserFriendRequest()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, userId])
 
   const removeFriend = async (id) => {
-    await MyAxios.delete(`friendships/${id}`)
-      .then((res) => {
-        if (res.data) {
-          setStatus(res.data.status)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.delete(`friendships/${id}`)
+      if (res.data) {
+        setStatus(res.data.status)
+      }
+    }
+    catch (error) {
+      console.log(error);
+    };
   };
 
   return (

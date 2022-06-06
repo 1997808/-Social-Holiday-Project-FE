@@ -18,45 +18,42 @@ export const Profile = () => {
 
   useEffect(() => {
     const getUserProfile = async () => {
-      await MyAxios.get(`users/profile/${id}`)
-        .then((res) => {
-          if (res.data) {
-            setUser(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`users/profile/${id}`)
+        if (res.data) {
+          setUser(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getUserProfile();
   }, [id]);
 
   useEffect(() => {
     const getUserPost = async () => {
-      await MyAxios.get(`posts/profile/${id}`)
-        .then((res) => {
-          if (res.data) {
-            setPosts(res.data.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`posts/profile/${id}`)
+        if (res.data) {
+          setPosts(res.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getUserPost();
   }, [id]);
 
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get("friendships/friend")
-        .then((res) => {
-          if (res.data) {
-            setFriends(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("friendships/friend")
+        if (res.data) {
+          setFriends(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getFriend();
   }, []);

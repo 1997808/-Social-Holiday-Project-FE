@@ -14,31 +14,29 @@ export const SearchUser = ({ userId, name, username, image, profileImageId }) =>
 
   useEffect(() => {
     const checkUserFriendStatus = async () => {
-      await MyAxios.get(`friendships/check/${userId}`)
-        .then((res) => {
-          if (res.data) {
-            setStatus(res.data)
-            setAddable(canAddFriendByStatus(status))
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`friendships/check/${userId}`)
+        if (res.data) {
+          setStatus(res.data)
+          setAddable(canAddFriendByStatus(status))
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     checkUserFriendStatus()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, userId])
 
   const addFriend = async (id) => {
-    await MyAxios.post(`friendships`, { receiver: id })
-      .then((res) => {
-        if (res.data) {
-          setStatus(res.data.status)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`friendships`, { receiver: id })
+      if (res.data) {
+        setStatus(res.data.status)
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

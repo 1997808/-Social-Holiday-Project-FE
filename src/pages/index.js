@@ -10,30 +10,28 @@ export const Home = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      await MyAxios.get("posts/all")
-        .then((res) => {
-          if (res.data) {
-            setPosts(res.data.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("posts/all")
+        if (res.data) {
+          setPosts(res.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getPosts();
   }, []);
 
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get("friendships/friend")
-        .then((res) => {
-          if (res.data) {
-            setFriends(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("friendships/friend")
+        if (res.data) {
+          setFriends(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getFriend();
   }, []);

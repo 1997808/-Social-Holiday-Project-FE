@@ -10,20 +10,19 @@ export const SignupForm = () => {
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    await MyAxios.post(`auth/signup`, data)
-      .then((res) => {
-        if (res.data.message === "SUCCESS") {
-          setTimeout(() => {
-            navigate("/auth/login", { replace: true });
-          }, 500)
-          setError("email", { type: "success", message: res.data.message });
-        } else {
-          setError("email", { type: "failed", message: res.data.message });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`auth/signup`, data)
+      if (res.data.message === "SUCCESS") {
+        setTimeout(() => {
+          navigate("/auth/login", { replace: true });
+        }, 500)
+        setError("email", { type: "success", message: res.data.message });
+      } else {
+        setError("email", { type: "failed", message: res.data.message });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

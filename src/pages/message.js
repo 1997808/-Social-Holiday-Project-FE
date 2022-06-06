@@ -13,15 +13,14 @@ export const Message = () => {
 
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get("conversations")
-        .then((res) => {
-          if (res.data) {
-            setConversations(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("conversations")
+        if (res.data) {
+          setConversations(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getFriend();
   }, []);

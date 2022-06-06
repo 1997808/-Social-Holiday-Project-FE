@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import { socket } from "../../app/services/socket";
 import { MyAxios } from "../../utils/api";
+import { DotPulse } from "../../utils/css";
 import { ChatCard } from "../Card/chatCard";
 import { ChatForm } from "../Form/chatForm";
 
 export const ChatBox = ({ conversationId }) => {
   const [conversation, setConversation] = useState({})
   const [count, setCount] = useState(0)
-  const [page, setPage] = useState(2)
+  const [page, setPage] = useState(1)
   const [skip, setSkip] = useState(15)
   const [chats, setChats] = useState([])
+  const [loading, setLoading] = useState(false)
   const listChatRef = useRef();
 
   useEffect(() => {
@@ -22,31 +24,29 @@ export const ChatBox = ({ conversationId }) => {
 
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get(`conversations/${conversationId}`)
-        .then((res) => {
-          if (res.data) {
-            setConversation(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`conversations/${conversationId}`)
+        if (res.data) {
+          setConversation(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getFriend();
   }, [conversationId]);
 
   useEffect(() => {
     const getMessage = async () => {
-      await MyAxios.post(`messages/conversation`, { conversationId })
-        .then((res) => {
-          if (res.data) {
-            setChats(res.data.data)
-            setCount(res.data.count)
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.post(`messages/conversation`, { conversationId })
+        if (res.data) {
+          setChats(res.data.data)
+          setCount(res.data.count)
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getMessage();
   }, [conversationId]);
@@ -55,16 +55,18 @@ export const ChatBox = ({ conversationId }) => {
     if (listChatRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listChatRef.current;
       if (clientHeight - scrollTop + 2 >= scrollHeight && chats.length < count) {
+        console.log(chats.length)
         // reached top of scroll
-        await MyAxios.post(`messages/conversation`, { conversationId, page: page, skipSocket: skip })
-          .then((res) => {
-            if (res.data) {
-              setChats((chats) => [...chats, ...res.data.data])
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        try {
+          // setLoading(true)
+          const res = await MyAxios.post(`messages/conversation`, { conversationId, page: page, skipSocket: skip })
+          if (res.data) {
+            // setLoading(false)
+            setChats((chats) => [...chats, ...res.data.data])
+          }
+        } catch (error) {
+          console.log(error);
+        }
         setPage(page + 1)
         setSkip(skip + 15)
       }
@@ -75,6 +77,9 @@ export const ChatBox = ({ conversationId }) => {
     <div className="w-full bg-white flex flex-col rounded h-screen">
       <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t" style={{ maxHeight: "10vh" }}>
         <p className="font-bold text-white">{conversation.title}</p>
+      </div>
+      <div className={`flex justify-center py-5 ${loading ? '' : 'hidden'}`}>
+        <DotPulse />
       </div>
       <div
         className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200 grow"
