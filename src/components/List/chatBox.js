@@ -61,14 +61,17 @@ export const ChatBox = ({ conversationId }) => {
           // setLoading(true)
           const res = await MyAxios.post(`messages/conversation`, { conversationId, page: page, skipSocket: skip })
           if (res.data) {
+            console.log(res.data.data.length)
             // setLoading(false)
             setChats((chats) => [...chats, ...res.data.data])
+            if (res.data.data.length > 0) {
+              setPage(page + 1)
+              // setSkip(skip + 15)
+            }
           }
         } catch (error) {
           console.log(error);
         }
-        setPage(page + 1)
-        setSkip(skip + 15)
       }
     }
   };
@@ -83,7 +86,7 @@ export const ChatBox = ({ conversationId }) => {
       </div>
       <div
         className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200 grow"
-        style={{ minHeight: "80vh" }}
+        style={{ minHeight: "75vh" }}
         onScroll={onScroll}
         ref={listChatRef}
       >
