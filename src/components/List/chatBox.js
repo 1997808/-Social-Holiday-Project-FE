@@ -12,6 +12,7 @@ export const ChatBox = ({ conversationId }) => {
   const [skip, setSkip] = useState(15)
   const [chats, setChats] = useState([])
   const [loading, setLoading] = useState(false)
+  const [typing, setTyping] = useState(false)
   const listChatRef = useRef();
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export const ChatBox = ({ conversationId }) => {
     if (listChatRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listChatRef.current;
       if (clientHeight - scrollTop + 2 >= scrollHeight && chats.length < count) {
-        console.log(chats.length, page, chats)
+        console.log(chats.length)
         // reached top of scroll
         try {
           setLoading(true)
@@ -86,11 +87,11 @@ export const ChatBox = ({ conversationId }) => {
       <div className="flex justify-between items-center p-5 py-6 bg-logo-orange rounded-t" style={{ maxHeight: "10vh" }}>
         <p className="font-bold text-white">{conversation.title}</p>
       </div>
-      <div className={`flex justify-center py-5 ${loading ? '' : 'hidden'}`}>
+      <div className={`flex justify-center items-center h-4 py-4 ${loading ? '' : 'opacity-0'}`}>
         <DotPulse />
       </div>
       <div
-        className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200 grow"
+        className="w-full overflow-y-auto flex flex-col-reverse grow"
         style={{ minHeight: "75vh" }}
         onScroll={loading ? () => { } : onScroll} //if loading don't get more
         ref={listChatRef}
@@ -103,7 +104,10 @@ export const ChatBox = ({ conversationId }) => {
           }
         })}
       </div>
-      <div className="rounded-b" style={{ minHeight: "10vh" }}>
+      <div className={`flex h-4 pl-8 py-4 ${typing ? '' : 'opacity-0'}`}>
+        <DotPulse />
+      </div>
+      <div className="rounded-b border-t border-solid border-gray-200" style={{ minHeight: "10vh" }}>
         <ChatForm conversationId={conversationId} />
       </div>
     </div>
