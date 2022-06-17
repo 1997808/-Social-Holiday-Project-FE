@@ -58,14 +58,16 @@ export const ChatBox = ({ conversationId }) => {
         console.log(chats.length)
         // reached top of scroll
         try {
-          // setLoading(true)
+          setLoading(true)
           const res = await MyAxios.post(`messages/conversation`, { conversationId, page: page, skipSocket: skip })
           if (res.data) {
             console.log(res.data.data.length)
-            // setLoading(false)
-            setChats((chats) => [...chats, ...res.data.data])
             if (res.data.data.length > 0) {
-              setPage(page + 1)
+              setTimeout(() => {
+                setLoading(false)
+                setChats((chats) => [...chats, ...res.data.data])
+                setPage(page + 1)
+              }, 1500)
               // setSkip(skip + 15)
             }
           }
@@ -87,7 +89,7 @@ export const ChatBox = ({ conversationId }) => {
       <div
         className="w-full overflow-y-auto flex flex-col-reverse border-b border-solid border-gray-200 grow"
         style={{ minHeight: "75vh" }}
-        onScroll={onScroll}
+        onScroll={loading ? () => { } : onScroll} //if loading don't get more
         ref={listChatRef}
       >
         {chats && chats.map(item => {
