@@ -43,6 +43,9 @@ export const ChatBox = ({ conversationId }) => {
         if (res.data) {
           setChats(res.data.data)
           setCount(res.data.count)
+          setPage(1)
+          setSkip(15)
+          setLoading(false)
         }
       } catch (error) {
         console.log(error);
@@ -55,7 +58,7 @@ export const ChatBox = ({ conversationId }) => {
     if (listChatRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = listChatRef.current;
       if (clientHeight - scrollTop + 2 >= scrollHeight && chats.length < count) {
-        console.log(chats.length)
+        console.log(chats.length, page, chats)
         // reached top of scroll
         try {
           setLoading(true)
@@ -68,7 +71,7 @@ export const ChatBox = ({ conversationId }) => {
                 setChats((chats) => [...chats, ...res.data.data])
                 setPage(page + 1)
               }, 1500)
-              // setSkip(skip + 15)
+              // setSkip(skip)
             }
           }
         } catch (error) {
