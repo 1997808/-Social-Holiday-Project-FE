@@ -12,36 +12,45 @@ export const FriendRequest = () => {
 
   useEffect(() => {
     const getPending = async () => {
-      await MyAxios.get("friendships/pending")
-        .then((res) => {
-          if (res.data) {
-            setRequests(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("friendships/pending")
+        if (res.data) {
+          setRequests(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getPending();
   }, []);
 
   const getUserProfile = async (id) => {
-    await MyAxios.get(`users/profile/${id}`)
-      .then((res) => {
-        if (res.data) {
-          setUser(res.data);
-          setPosts(res.data.posts);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.get(`users/profile/${id}`)
+      if (res.data) {
+        setUser(res.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getUserPost = async (id) => {
+    try {
+      const res = await MyAxios.get(`posts/profile/${id}`)
+      if (res.data) {
+        setPosts(res.data.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const checkUserProfile = (id) => {
     if (userId !== id) {
       //less reload
       getUserProfile(id);
+      getUserPost(id)
       setUserId(id);
     }
   }

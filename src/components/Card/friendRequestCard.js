@@ -8,28 +8,27 @@ import { Image } from "cloudinary-react";
 export const FriendRequestCard = ({ id, userId, profileImageId, name, username, checkUserProfile }) => {
   const [review, setReview] = useState(false);
   const acceptFriendRequest = async (id) => {
-    await MyAxios.post(`friendships/acceptFriendRequest`, { id })
-      .then((res) => {
-        if (res.data.affected) {
-          setReview(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`friendships/acceptFriendRequest`, { id })
+      if (res.data.affected) {
+        setReview(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const declineFriendRequest = async (id) => {
-    await MyAxios.post(`friendships/declineFriendRequest`, { id })
-      .then((res) => {
-        if (res.data.affected) {
-          setReview(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`friendships/declineFriendRequest`, { id })
+      if (res.data.affected) {
+        setReview(true);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <div className={`w-full h-auto flex justify-center bg-white rounded p-5 ${review ? "opacity-75 bg-gray-200" : ""}`} onClick={() => checkUserProfile(userId)}>
       {profileImageId ?

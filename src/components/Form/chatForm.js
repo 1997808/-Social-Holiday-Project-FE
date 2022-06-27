@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { useForm } from 'react-hook-form';
-// import { MyAxios } from "../../utils/api";
 import { text_limit } from "../../utils/css";
 import { ButtonSmall } from "../Button/buttonSmall";
 import { SocketContext } from "../../app/services/socket"
@@ -20,19 +19,24 @@ export const ChatForm = ({ conversationId }) => {
     });
   };
 
+  const onChange = async () => {
+    socket.emit('handleTyping', { conversationId, userId });
+  };
+
   return (
     <div className="w-full h-full flex items-center bg-white rounded p-5">
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex">
         <textarea
           type="text"
-          placeholder="What is new?"
+          placeholder="Message something"
           maxLength={text_limit}
           {...register("content", { required: true })}
+          onChange={() => onChange()}
           className="resize-none text-sm w-full focus:outline-none border-none rounded mr-5"
         />
 
         <div className="flex items-center">
-          <ButtonSmall text={"Upload"} type="submit" />
+          <ButtonSmall text={"Send"} type="submit" />
         </div>
       </form>
     </div>

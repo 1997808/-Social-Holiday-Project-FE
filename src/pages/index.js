@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { socket } from "../app/services/socket";
 import { PostForm } from "../components/Form/postForm";
 import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
@@ -10,33 +11,40 @@ export const Home = () => {
 
   useEffect(() => {
     const getPosts = async () => {
-      await MyAxios.get("posts/all")
-        .then((res) => {
-          if (res.data) {
-            setPosts(res.data.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("posts/all")
+        if (res.data) {
+          setPosts(res.data.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getPosts();
   }, []);
 
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get("friendships/friend")
-        .then((res) => {
-          if (res.data) {
-            setFriends(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("friendships/friend")
+        if (res.data) {
+          setFriends(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getFriend();
   }, []);
+
+  useEffect(() => {
+    socket.on('newGlobalPost', (data) => {
+      setPosts((posts) => [data, ...posts])
+      // setCount((count) => count + 1)
+      // setSkip((skip) => skip + 1)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

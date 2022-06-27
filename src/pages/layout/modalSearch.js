@@ -13,25 +13,23 @@ export const ModalSearch = ({ setOpen, setChat }) => {
   useEffect(() => {
     const getUsers = async () => {
       if (keyword !== "") {
-        await MyAxios.post("users/search", { keyword })
-          .then((res) => {
-            if (res.data) {
-              setUsers(res.data.data);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        try {
+          const res = await MyAxios.post("users/search", { keyword })
+          if (res.data) {
+            setUsers(res.data.data);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       } else {
-        await MyAxios.get("friendships/friend")
-          .then((res) => {
-            if (res.data) {
-              setUsers(res.data);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        try {
+          const res = await MyAxios.get("friendships/friend")
+          if (res.data) {
+            setUsers(res.data);
+          }
+        } catch (error) {
+          console.log(error);
+        }
       }
     };
     getUsers();
@@ -42,15 +40,14 @@ export const ModalSearch = ({ setOpen, setChat }) => {
   };
 
   const addConversation = async () => {
-    await MyAxios.post(`conversations`, { userids: participants, type })
-      .then((res) => {
-        if (res.data) {
-          setOpen(false)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`conversations`, { userids: participants, type })
+      if (res.data) {
+        setOpen(false)
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

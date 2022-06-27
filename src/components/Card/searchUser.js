@@ -6,6 +6,7 @@ import { ButtonInvert } from "../Button/buttonInvert";
 import { MyAxios } from "../../utils/api";
 import { Image } from "cloudinary-react";
 import { FRIENDSHIP_STATUS } from "../../app/constant"
+import { canAddFriendByStatus } from "../../utils/helper";
 
 export const SearchUser = ({ userId, name, username, image, profileImageId }) => {
   const [status, setStatus] = useState(FRIENDSHIP_STATUS.NULL);
@@ -13,48 +14,29 @@ export const SearchUser = ({ userId, name, username, image, profileImageId }) =>
 
   useEffect(() => {
     const checkUserFriendStatus = async () => {
-      await MyAxios.get(`friendships/check/${userId}`)
-        .then((res) => {
-          if (res.data) {
-            setStatus(res.data)
-            setAddable(canAddFriend())
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`friendships/check/${userId}`)
+        if (res.data) {
+          setStatus(res.data)
+          setAddable(canAddFriendByStatus(status))
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     checkUserFriendStatus()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, userId])
 
-  const canAddFriend = () => {
-    switch (status) {
-      case FRIENDSHIP_STATUS.NULL:
-        return true
-      case FRIENDSHIP_STATUS.PENDING:
-        return false
-      case FRIENDSHIP_STATUS.ACCEPTED:
-        return false
-      case FRIENDSHIP_STATUS.DECLINED:
-        return true
-      case FRIENDSHIP_STATUS.CANCEL:
-        return true
-      default:
-        return false
-    }
-  }
-
   const addFriend = async (id) => {
-    await MyAxios.post(`friendships`, { receiver: id })
-      .then((res) => {
-        if (res.data) {
-          setStatus(res.data.status)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`friendships`, { receiver: id })
+      if (res.data) {
+        setStatus(res.data.status)
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

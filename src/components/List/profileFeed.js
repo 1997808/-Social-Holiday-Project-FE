@@ -9,11 +9,12 @@ export const ProfileFeed = ({ data, author }) => {
           key={item.id}
           id={item.id}
           name={author.name}
+          image={item.imageUrl ? item.imageUrl[0] : item.imageUrl}
           username={author.username}
           date={item.createdAt}
           content={item.content}
           profileImageId={author.cloudinaryId}
-        // votes={item.votes}
+          comments={item.comments}
         />
       ))}
     </div>
