@@ -18,7 +18,7 @@ export const ProfileEditForm = () => {
 
   const changeHandler = (event) => {
     // cancel choose when already have image
-    if (event.target.files[0] !== undefined && isFilePicked === true) {
+    if (event.target.files[0] !== undefined) {
       setSelectedFile(event.target.files[0]);
       setIsFilePicked(true);
     }
