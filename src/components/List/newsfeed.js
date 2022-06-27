@@ -10,6 +10,7 @@ export const NewsFeed = (data) => {
           key={item.id}
           id={item.id}
           authorId={item.author.id}
+          image={item.imageUrl ? item.imageUrl[0] : item.imageUrl}
           name={item.author.name}
           username={item.author.username}
           date={item.createdAt}

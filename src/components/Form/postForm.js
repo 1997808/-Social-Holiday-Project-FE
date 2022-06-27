@@ -71,7 +71,7 @@ export const PostForm = () => {
         />
         <input className="hidden" type="file" name="file" ref={fileInput} onChange={changeHandler} />
         <div
-          className={`w-32 h-32 flex justify-center items-center ${isFilePicked ? '' : 'border border-dashed'} mb-8`}
+          className={`w-32 h-32 flex justify-center items-center cursor-pointer ${isFilePicked ? '' : 'border border-dashed opacity-50'} mb-8`}
           onClick={() => fileInput.current.click()}
         >
           {isFilePicked && selectedFile !== null ? (
@@ -79,7 +79,7 @@ export const PostForm = () => {
           ) : (
             <>
               <PhotographIcon className="h-6 w-6" />
-              Choose File
+              Image
             </>
           )}
         </div>

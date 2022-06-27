@@ -67,6 +67,7 @@ export const PostDetail = () => {
                 key={post.id}
                 id={post.id}
                 authorId={post.author.id}
+                image={post.imageUrl ? post.imageUrl[0] : post.imageUrl}
                 name={post.author.name}
                 username={post.author.username}
                 date={post.createdAt}
