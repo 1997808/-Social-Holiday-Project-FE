@@ -12,18 +12,16 @@ export const CommentForm = ({ postid }) => {
   let user = useSelector((state) => state.user);
 
   const onSubmit = async (data) => {
-    await MyAxios.post(`comments`, { post: postid, ...data })
-      .then((res) => {
-        console.log(res)
-        if (res.statusText === "Created") {
-          reset({ content: "" });
-        } else {
-          console.log("fail");
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`comments`, { post: postid, ...data })
+      if (res.statusText === "Created") {
+        reset({ content: "" });
+      } else {
+        console.log("fail");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

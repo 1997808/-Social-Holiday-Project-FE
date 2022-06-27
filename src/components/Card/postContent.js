@@ -42,6 +42,13 @@ export const PostContent = ({ id, authorId, image, name, username, date, content
                 ? content
                 : "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
             </p>
+            {image ?
+              <Image
+                className="w-full h-80 rounded object-cover"
+                cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
+                publicId={image}
+                crop="scale"
+              /> : <></>}
           </Link>
           <div className="pr-10 mr-5">
             <PostStat postid={id} comments={comments} />

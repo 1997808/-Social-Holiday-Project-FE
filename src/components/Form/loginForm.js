@@ -15,26 +15,25 @@ export const LoginForm = () => {
   let navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    await MyAxios.post(`auth/login`, data)
-      .then((res) => {
-        if (res.data.accessToken) {
-          dispatch(login());
-          dispatch(setUser(res.data.user));
-          localStorage.setItem("token", res.data.accessToken);
-          // attach token to every axios call
-          MyAxios.interceptors.request.use(function (config) {
-            const token = localStorage.getItem("token");
-            config.headers.Authorization = token ? `Bearer ${token}` : "";
-            return config;
-          });
-          navigate("/");
-        } else {
-          setError("email", { type: "failed", message: res.data });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post(`auth/login`, data)
+      if (res.data.accessToken) {
+        dispatch(login());
+        dispatch(setUser(res.data.user));
+        localStorage.setItem("token", res.data.accessToken);
+        // attach token to every axios call
+        MyAxios.interceptors.request.use(function (config) {
+          const token = localStorage.getItem("token");
+          config.headers.Authorization = token ? `Bearer ${token}` : "";
+          return config;
+        });
+        navigate("/");
+      } else {
+        setError("email", { type: "failed", message: res.data });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

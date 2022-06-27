@@ -15,46 +15,43 @@ export const PostDetail = () => {
 
   useEffect(() => {
     const getPost = async () => {
-      await MyAxios.get(`posts/${id}`)
-        .then((res) => {
-          if (res.data) {
-            setPost(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`posts/${id}`)
+        if (res.data) {
+          setPost(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getPost();
   }, [id]);
 
   useEffect(() => {
     const getFriend = async () => {
-      await MyAxios.get("friendships/friend")
-        .then((res) => {
-          if (res.data) {
-            setFriends(res.data);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("friendships/friend")
+        if (res.data) {
+          setFriends(res.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getFriend();
   }, []);
 
   useEffect(() => {
     const getComments = async () => {
-      await MyAxios.post(`comments/post`, { postId: id })
-        .then((res) => {
-          if (res.data) {
-            setComments(res.data.data)
-            setCount(res.data.count)
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.post(`comments/post`, { postId: id })
+        if (res.data) {
+          setComments(res.data.data)
+          setCount(res.data.count)
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getComments();
   }, [id]);
@@ -70,6 +67,7 @@ export const PostDetail = () => {
                 key={post.id}
                 id={post.id}
                 authorId={post.author.id}
+                image={post.imageUrl ? post.imageUrl[0] : post.imageUrl}
                 name={post.author.name}
                 username={post.author.username}
                 date={post.createdAt}

@@ -9,45 +9,42 @@ export const PostCommentStat = ({ commentId, comments }) => {
   const [vote, setVote] = useState(null)
 
   const checkUserVotecomment = async () => {
-    await MyAxios.get(`votecomments/check/${commentId}`)
-      .then((res) => {
-        if (res.data) {
-          setVote(res.data.data)
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.get(`votecomments/check/${commentId}`)
+      if (res.data) {
+        setVote(res.data.data)
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     const getCommentvote = async () => {
-      await MyAxios.get(`votecomments/comment/${commentId}`)
-        .then((res) => {
-          if (res.data) {
-            setUpvotes(res.data.upvotes)
-            setDownvotes(res.data.downvotes)
-            checkUserVotecomment()
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get(`votecomments/comment/${commentId}`)
+        if (res.data) {
+          setUpvotes(res.data.upvotes)
+          setDownvotes(res.data.downvotes)
+          checkUserVotecomment()
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
     getCommentvote()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [commentId, vote])
 
   const handleCommentvote = async (vote) => {
-    await MyAxios.post("votecomments/handle", { commentId, vote })
-      .then((res) => {
-        if (res.data) {
-          checkUserVotecomment()
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      const res = await MyAxios.post("votecomments/handle", { commentId, vote })
+      if (res.data) {
+        checkUserVotecomment()
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
 } from "react-router-dom";
 import { ScrollToTop, ProtectedRoute, AuthRoute } from "./utils/CustomRoute";
 import { ClearLayout } from "./pages/layout/clear";
@@ -30,23 +29,23 @@ function App() {
 
   useEffect(() => {
     const checkLogin = async () => {
-      await MyAxios.get("auth/checkLogin")
-        .then((res) => {
-          if (res.data) {
-            dispatch(setUser(res.data.user));
-            dispatch(login());
-          } else {
-            localStorage.removeItem("token");
-            dispatch(resetUser());
-            dispatch(logOut());
-            return (
-              <Navigate to="/auth/login" replace={true} />
-            )
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const res = await MyAxios.get("auth/checkLogin")
+        if (res.data) {
+          dispatch(setUser(res.data.user));
+          dispatch(login());
+        } else {
+          localStorage.removeItem("token");
+          dispatch(resetUser());
+          dispatch(logOut());
+          // return (
+          //   <Navigate to="/auth/login" replace={true} />
+          // )
+        }
+      }
+      catch (error) {
+        console.log(error);
+      };
     };
     checkLogin();
   }, [dispatch]);
