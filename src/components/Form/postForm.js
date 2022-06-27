@@ -9,6 +9,7 @@ import { text_limit } from "../../utils/css";
 import {
   PhotographIcon,
 } from "@heroicons/react/outline";
+import { socket } from "../../app/services/socket";
 
 export const PostForm = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -34,6 +35,7 @@ export const PostForm = () => {
       const res = await MyAxios.post(`posts/image`, form)
       // console.log(res.data) data post just created
       if (res.statusText === "Created") {
+        socket.emit('handleNewGlobalPost', res.data);
         reset({ content: "" });
         setSelectedFile(null)
         setIsFilePicked(false)

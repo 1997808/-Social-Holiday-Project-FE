@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { socket } from "../app/services/socket";
 import { PostForm } from "../components/Form/postForm";
 import { FriendActiveList } from "../components/List/friendActiveList";
 import { NewsFeed } from "../components/List/newsfeed";
@@ -35,6 +36,15 @@ export const Home = () => {
     };
     getFriend();
   }, []);
+
+  useEffect(() => {
+    socket.on('newGlobalPost', (data) => {
+      setPosts((posts) => [data, ...posts])
+      // setCount((count) => count + 1)
+      // setSkip((skip) => skip + 1)
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <>

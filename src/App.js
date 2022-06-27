@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
 } from "react-router-dom";
 import { ScrollToTop, ProtectedRoute, AuthRoute } from "./utils/CustomRoute";
 import { ClearLayout } from "./pages/layout/clear";
