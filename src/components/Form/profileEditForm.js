@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../Button/button";
 import { data_limit, input_normal, text_limit } from "../../utils/css";
-// import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-// import { login } from "../../app/auth";
 import { MyAxios } from "../../utils/api";
+import {
+  PhotographIcon,
+} from "@heroicons/react/outline";
 
 export const ProfileEditForm = () => {
   const { register, handleSubmit, formState: { errors }, reset, setError } = useForm();
@@ -13,10 +14,14 @@ export const ProfileEditForm = () => {
 
   const [selectedFile, setSelectedFile] = useState();
   const [isFilePicked, setIsFilePicked] = useState(false);
+  const fileInput = useRef(null)
 
   const changeHandler = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setIsFilePicked(true);
+    // cancel choose when already have image
+    if (event.target.files[0] !== undefined && isFilePicked === true) {
+      setSelectedFile(event.target.files[0]);
+      setIsFilePicked(true);
+    }
   };
 
   const handleSubmission = async () => {
@@ -67,16 +72,20 @@ export const ProfileEditForm = () => {
     <>
       <div className="w-full p-8 rounded h-full flex flex-col justify-between items-center bg-white">
         <div className="mb-16">
-          <input type="file" name="file" onChange={changeHandler} />
-          {isFilePicked ? (
-            <div>
-              <p>Filename: {selectedFile.name}</p>
-              <p>Filetype: {selectedFile.type}</p>
-              <p>Size: {Math.ceil(selectedFile.size / 1000)}KB</p>
-            </div>
-          ) : (
-            <p>Select a file to show details</p>
-          )}
+          <input className="hidden" type="file" name="file" ref={fileInput} onChange={changeHandler} />
+          <div
+            className='w-64 h-64 flex justify-center items-center border border-dashed mb-8'
+            onClick={() => fileInput.current.click()}
+          >
+            {isFilePicked ? (
+              <img className="w-64 h-64 object-cover my-8" src={URL.createObjectURL(selectedFile)} alt="omegalul" />
+            ) : (
+              <>
+                <PhotographIcon className="h-6 w-6" />
+                Choose File
+              </>
+            )}
+          </div>
           {errors.file && <p className={`${errors.file.type === "success" ? "text-green-500" : "text-red-500"} text-xs mb-4 lg:mb-6`}>{errors.file.message}</p>}
 
           <Button text={"Change profile picture"} onClick={isFilePicked ? handleSubmission : () => { }} />
