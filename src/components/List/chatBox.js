@@ -13,7 +13,30 @@ export const ChatBox = ({ conversationId }) => {
   const [chats, setChats] = useState([])
   const [loading, setLoading] = useState(false)
   const [typing, setTyping] = useState(false)
+  let animationTime = 0
   const listChatRef = useRef();
+
+  useEffect(() => {
+    socket.on('someoneTyping', (data) => {
+      console.log(data)
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      animationTime = 2000
+    })
+  }, [])
+
+  useEffect(() => {
+    setInterval(() => {
+      console.log(animationTime)
+      if (animationTime > 0) {
+        setTyping(true)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        animationTime -= 1000
+      } else {
+        setTyping(false)
+      }
+    }, 1000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     socket.on('newMessage', (data) => {
@@ -104,7 +127,7 @@ export const ChatBox = ({ conversationId }) => {
           }
         })}
       </div>
-      <div className={`flex h-4 pl-8 py-4 ${typing ? '' : 'opacity-0'}`}>
+      <div className={`flex h-4 pl-8 py-4 transition duration-150 ${typing ? 'opacity-100' : 'opacity-0'}`}>
         <DotPulse />
       </div>
       <div className="rounded-b border-t border-solid border-gray-200" style={{ minHeight: "10vh" }}>
