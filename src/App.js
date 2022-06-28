@@ -38,6 +38,9 @@ function App() {
           localStorage.removeItem("token");
           dispatch(resetUser());
           dispatch(logOut());
+          // setTimeout(() => {
+          //   window.location.reload()
+          // }, 500)
           // return (
           //   <Navigate to="/auth/login" replace={true} />
           // )

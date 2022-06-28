@@ -20,6 +20,9 @@ export const Sidenav = () => {
   const logOutButton = () => {
     localStorage.clear();
     dispatch(logOut());
+    setTimeout(() => {
+      window.location.reload()
+    }, 500)
   };
   return (
     <div className="hidden sm:flex flex-col items-center xl:items-start xl:w-[340px] p-2 fixed h-full">
