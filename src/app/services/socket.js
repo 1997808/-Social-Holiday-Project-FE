@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 
 const accessToken = localStorage.getItem("token");
 
-export const socket = io(process.env.REACT_APP_SOCKET_URL, {
+export const socket = io(process.env.REACT_APP_IP + ':' + process.env.REACT_APP_PORT, {
   auth: {
     token: `Bearer ${accessToken}`
   }
